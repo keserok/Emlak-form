@@ -10,7 +10,7 @@ import VaultUnlockFx from './components/VaultUnlockFx';
 import AdminDashboard from './components/admin/AdminDashboard';
 import StandardDemoSite from './components/demos/StandardDemoSite';
 import SelinKaracaEmbed from './selin-site/SelinKaracaEmbed';
-import { STEPS_DATA } from './data/stepsData';
+import { getStepData, STEPS_DATA } from './data/stepsData';
 import { calculatePackage } from './utils/algorithm';
 import { getStoredLeads, saveLead, updateLeadStatus, updateLeadPackageAndStatus } from './utils/storage';
 
@@ -188,7 +188,7 @@ export default function App() {
   };
 
   // Check if current step can proceed (multi-select)
-  const currentStepData = STEPS_DATA.find((s) => s.id === currentStepIndex);
+  const currentStepData = getStepData(currentStepIndex, answers);
   const selectedAnswer = answers[currentStepIndex] || [];
   const hasSelection = Array.isArray(selectedAnswer) ? selectedAnswer.length > 0 : !!selectedAnswer;
   const customSloganValid =

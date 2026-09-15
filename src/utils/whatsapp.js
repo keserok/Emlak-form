@@ -16,27 +16,37 @@ export function generateWhatsAppLink(leadData, packageResult, activePackage) {
                value === 'large_development' ? 'Büyük Ölçekli Gayrimenkul & İnşaat Projesi' : 'Arsa & Yatırım Projeleri';
       case 2:
         if (value === 'custom_slogan' && customSlogan) return `Özel: "${customSlogan}"`;
-        return value === 'calm_trust' ? 'Sakin & Güven Verici' :
+        return value === 'project_vision' ? 'Prestij & Mimari İhtişam' :
+               value === 'project_lifestyle' ? 'Ayrıcalıklı Yaşam & Konfor' :
+               value === 'project_investment' ? 'Yüksek Yatırım Değeri & Gelecek' :
+               value === 'calm_trust' ? 'Sakin & Güven Verici' :
                value === 'friendly_needs' ? 'İhtiyaç Odaklı & Samimi' :
                value === 'result_oriented' ? 'Net & Sonuç Odaklı' : 'Özel Slogan';
       case 3:
         return value === 'advisor_portrait' ? 'Samimi Danışman Portresi (⭐ MediArt Tavsiyesi)' :
-               value === 'project_architecture' ? 'Proje Mimarisi & Sinematik Lansman' : 'İkonik Portföy / Manzara';
+               value === 'project_architecture' ? 'Proje Mimarisi & Dış Cephe Çekimi' :
+               value === 'project_amenities' ? 'Sosyal Donatılar & Peyzaj Alanları' :
+               value === 'project_interiors' ? 'İç Mimari & Örnek Daire Tasarımı' : 'İkonik Portföy / Manzara';
       case 4:
         return value === 'warm_editorial' ? 'Warm Editorial' :
                value === 'pure_architectural' ? 'Pure Architectural' : 'High-End Dark';
       case 5:
-        return value === 'direct_whatsapp' ? 'Hızlı WhatsApp' :
+        return value === 'direct_whatsapp' ? 'Hızlı Satış WhatsApp Hattı' :
                value === 'calendar_booking' ? '15 Dk. Randevu Takvimi' :
                value === 'property_submission' ? 'Evimi Sat Formu' :
-               value === 'project_sales_office' ? 'Satış Ofisi & Kat Planı İndirme' : 'Doğrudan Arama';
+               value === 'project_sales_office' ? 'Satış Ofisi Randevusu & VIP Tanışma' :
+               value === 'project_brochure' ? 'Kat Planı & Broşür İndirme' :
+               value === 'project_pricing_form' ? 'Fiyat Listesi & Ödeme Planı Formu' : 'Doğrudan Arama';
       case 6:
         return value === 'light_showcase' ? 'Temel Vitrin Paneli' :
                value === 'dynamic_portfolio' ? 'Dinamik Portföy Paneli' :
-               value === 'project_inventory_panel' ? 'Dinamik Proje & Ünite Stok Paneli' : 'Çoklu Danışman Altyapısı';
+               value === 'multi_agent_system' ? 'Çoklu Danışman Altyapısı' :
+               value === 'project_inventory_panel' ? 'Dinamik Proje & Ünite Stok Paneli' :
+               value === 'project_interactive_selector' ? 'İnteraktif Kat & Daire Seçici' :
+               value === 'project_lead_distribution' ? 'Satış Ekibi & Lead Dağıtım Paneli' : value;
       case 7:
-        return value === 'tr_reviews' ? 'Türkçe & Google Puanı' :
-               value === 'multilingual' ? 'Çoklu Dil Altyapısı' : value;
+        return value === 'tr_reviews' ? 'Türkçe & Değerlendirme / E-Broşür' :
+               value === 'multilingual' ? 'Çok Dilli Küresel Lansman' : value;
       default:
         return value;
     }

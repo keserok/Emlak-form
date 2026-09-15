@@ -18,12 +18,8 @@ export function calculatePackage(answers) {
   const step6 = answers[6]; // Panel: light_showcase | dynamic_portfolio | multi_agent_system | project_inventory_panel
   const step7 = answers[7]; // Modules: tr_reviews | multilingual
 
-  // Check for Büyük Proje triggers
-  const isProject =
-    has(step1, 'large_development') ||
-    has(step6, 'project_inventory_panel') ||
-    has(step5, 'project_sales_office') ||
-    has(step3, 'project_architecture');
+  // Check for Büyük Proje triggers (Strictly determined by Step 1 choice)
+  const isProject = has(step1, 'large_development');
 
   // Check for Premium triggers
   const isPremium =

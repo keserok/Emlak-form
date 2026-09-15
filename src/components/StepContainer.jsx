@@ -27,6 +27,17 @@ export default function StepContainer({
     currentSelectionRef.current = currentSelection;
   }, [currentSelection]);
 
+  const autoAdvanceTimerRef = useRef(null);
+
+  // Clear timer on unmount
+  useEffect(() => {
+    return () => {
+      if (autoAdvanceTimerRef.current) {
+        clearTimeout(autoAdvanceTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleToggle = useCallback(
     (val) => {
       if (stepData.isMultiSelect) {
@@ -39,9 +50,19 @@ export default function StepContainer({
       } else {
         // Single-select: replace choice
         onSelectAnswer([val]);
+
+        // Step 1: Smooth auto-advance after tactile feedback delay (~300ms)
+        if (stepData.id === 1) {
+          if (autoAdvanceTimerRef.current) {
+            clearTimeout(autoAdvanceTimerRef.current);
+          }
+          autoAdvanceTimerRef.current = setTimeout(() => {
+            onNext();
+          }, 320);
+        }
       }
     },
-    [stepData.isMultiSelect, onSelectAnswer]
+    [stepData.id, stepData.isMultiSelect, onSelectAnswer, onNext]
   );
 
   // Sync custom slogan
@@ -51,7 +72,7 @@ export default function StepContainer({
     onUpdateCustomSlogan(val);
   };
 
-  // Keyboard shortcut listener (1, 2, 3, 4, Enter)
+  // Keyboard shortcut listener (1, 2, 3, 4, 5, Enter)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Don't trigger if user is typing in textarea or input
@@ -71,6 +92,8 @@ export default function StepContainer({
         handleToggle(stepData.options[2].value);
       } else if (e.key === '4' && stepData.options[3]) {
         handleToggle(stepData.options[3].value);
+      } else if (e.key === '5' && stepData.options[4]) {
+        handleToggle(stepData.options[4].value);
       } else if (e.key === 'Enter' && canProceed) {
         onNext();
       }
