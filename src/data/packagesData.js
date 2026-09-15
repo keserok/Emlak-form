@@ -15,7 +15,7 @@ export const ALL_PACKAGES = [
     itemsPrefix: null,
     items: [
       'Stüdyo Kalitesinde Danışman Portre & Güven Çapası',
-      'Seçkin 15 Mülk Yönetimi İçin Hafif Vitrin Paneli',
+      'Seçkin Portföy Yönetimi İçin Hafif Vitrin Paneli',
       'Tek Tıkla Doğrudan WhatsApp Hızlı İletişim Hattı',
       'Türkçe Dil & Doğrulanmış Google Değerlendirme Modülü',
       '%100 Mobil Uyumlu Editoryal Tasarım & Temel SEO'

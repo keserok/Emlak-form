@@ -819,7 +819,7 @@ export default function StandardDemoSite({ onReturn }) {
                       </h2>
 
                       <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xl">
-                        Kişisel portföyümde sınırlı kontenjanla yer almak, gerçek piyasa emsalleriyle değerleme yaptırmak ve gizlilik prensibiyle doğru alıcıyla buluşmak için formumuzu doldurabilirsiniz.
+                        Mülkünüz için gerçek piyasa emsalleriyle değerleme yaptırmak, güvenilir ekspertiz raporu almak ve gizlilik prensibiyle doğru alıcıyla buluşmak için formumuzu doldurabilirsiniz.
                       </p>
 
                       <div className="pt-4 flex flex-wrap items-center gap-3">
