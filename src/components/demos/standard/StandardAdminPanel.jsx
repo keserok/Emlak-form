@@ -64,11 +64,6 @@ export default function StandardAdminPanel({
     e?.preventDefault();
     if (!newListingForm.title.trim()) return;
 
-    if (listings.length >= 15) {
-      alert('Standart pakette maksimum 15 butik portföy sınırı bulunmaktadır. Lütfen mevcut bir portföyü silin veya güncelleyin.');
-      return;
-    }
-
     const newListing = {
       id: Date.now(),
       ...newListingForm,
@@ -192,7 +187,7 @@ export default function StandardAdminPanel({
             <Building2 className="w-4 h-4" />
             <span>Portföy Yönetimi</span>
             <span className="px-2 py-0.5 rounded-full text-[10px] bg-emerald-50 text-emerald-700 font-mono border border-emerald-200">
-              {listings.length}/15
+              {listings.length}
             </span>
           </button>
 
@@ -346,28 +341,18 @@ export default function StandardAdminPanel({
         {activeTab === 'listings' && (
           <div className="space-y-6">
             
-            {/* Quota & Action Header */}
+            {/* Portfolio Action Header */}
             <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-semibold text-base text-slate-900">Butik Portföy Havuzu</h2>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                    Maksimum 15 Kota
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                    Aktif Vitrin
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">
-                  Şu an <strong className="text-slate-800">{listings.length}/15</strong> portföy yayında. (Kalan kontenjan: {15 - listings.length})
+                  Şu an vitrinde <strong className="text-slate-800">{listings.length}</strong> seçkin portföy yayında.
                 </p>
-                
-                {/* Visual Quota Progress Bar */}
-                <div className="w-48 h-2 bg-slate-100 rounded-full mt-2 overflow-hidden">
-                  <div 
-                    className={`h-full transition-all ${
-                      listings.length >= 14 ? 'bg-rose-500' : 'bg-emerald-600'
-                    }`}
-                    style={{ width: `${(listings.length / 15) * 100}%` }}
-                  />
-                </div>
               </div>
 
               <button
@@ -612,7 +597,7 @@ export default function StandardAdminPanel({
 
             <div>
               <h3 className="font-semibold text-base text-slate-900">Yeni Butik Portföy Ekle</h3>
-              <p className="text-xs text-slate-500">Maksimum 15 portföylük butik listenize yeni bir mülk ekleyin.</p>
+              <p className="text-xs text-slate-500">Butik portföy listenize yeni bir mülk ekleyin.</p>
             </div>
 
             <form onSubmit={handleAddListingSubmit} className="space-y-4">

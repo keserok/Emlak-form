@@ -7,7 +7,7 @@ export const initialStandardProfile = {
   email: "deniz@butikgayrimenkul.com",
   officeAddress: "Keklicek Mevkii No: 18, Urla / İzmir",
   avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
-  badge: "Butik Danışmanlık • Maksimum 15 Seçkin Portföy",
+  badge: "Ege & Akdeniz Butik Gayrimenkul Danışmanlığı",
   headline: "Karakterli Evler, Sakin Yaşamlar.",
   subheadline: "Yüzlerce ilanın arasında kaybolmayın. Ege ve Akdeniz'in huzurlu lokasyonlarında, mimarisi ve tapusu doğrulanmış seçkin mülklerle Butik Gayrimenkul güvencesiyle yalnızca size özel çalışıyorum.",
   googleReviews: {

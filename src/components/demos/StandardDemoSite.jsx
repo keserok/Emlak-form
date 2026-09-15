@@ -128,13 +128,20 @@ export default function StandardDemoSite({ onReturn }) {
   const [agentProfile, setAgentProfile] = useState(() => {
     try {
       const saved = localStorage.getItem('standard_demo_profile');
-      return saved ? JSON.parse(saved) : initialStandardProfile;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.badge && parsed.badge.includes('15')) {
+          parsed.badge = 'Ege & Akdeniz Butik Gayrimenkul Danışmanlığı';
+        }
+        return parsed;
+      }
+      return initialStandardProfile;
     } catch {
       return initialStandardProfile;
     }
   });
 
-  // Listings state (maximum 15 boutique items)
+  // Listings state
   const [listings, setListings] = useState(() => {
     try {
       const saved = localStorage.getItem('standard_demo_listings');
@@ -311,7 +318,7 @@ export default function StandardDemoSite({ onReturn }) {
                 
                 <div className="md:col-span-7 space-y-5">
                   <div className="font-serif italic text-xs sm:text-sm tracking-[0.16em] text-[#7C6A59] font-normal">
-                    {agentProfile.badge || 'Butik Danışmanlık • Maksimum 15 Seçkin Portföy'}
+                    {(agentProfile.badge || 'Ege & Akdeniz Butik Gayrimenkul Danışmanlığı').replace(/•\s*Maksimum\s*15\s*Seçkin\s*Portföy/gi, '').replace(/Maksimum\s*15\s*Seçkin\s*Portföy/gi, '').trim() || 'Ege & Akdeniz Butik Gayrimenkul Danışmanlığı'}
                   </div>
 
                   <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1E2522] leading-[1.15] font-medium tracking-tight">
@@ -409,7 +416,7 @@ export default function StandardDemoSite({ onReturn }) {
               </div>
             </section>
 
-            {/* Featured Boutique Portfolio (15-listing boutique system) */}
+            {/* Featured Boutique Portfolio */}
             <section id="portfoy" className="py-14 sm:py-16 bg-white border-y border-[#E8E4DC] scroll-mt-20">
               <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 
@@ -545,7 +552,7 @@ export default function StandardDemoSite({ onReturn }) {
                       Mülkünüzü Doğru Değerinde Sakin Alıcı Ağına Sunun
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      Kişisel portföyümde sınırlı 15 kontenjanla yer almak, emsal değerleme ve tapu-hukuk ön incelemesi için online formumuzu doldurabilirsiniz.
+                      Mülkünüz için gerçek piyasa emsal değerlemesi ve tapu-hukuk ön incelemesi için online formumuzu doldurabilirsiniz.
                     </p>
                   </div>
 
@@ -585,7 +592,7 @@ export default function StandardDemoSite({ onReturn }) {
                     { val: '₺480M+', label: 'Tamamlanan İşlem Hacmi', sub: 'Ege & Akdeniz Butik Portföy' },
                     { val: '16 Gün', label: 'Ortalama Nitelikli Eşleşme', sub: 'Hedef Alıcı Portföyüyle' },
                     { val: '%100', label: 'Hukuki Güvence', sub: 'Doğrulanmış Tapu & Ekspertiz' },
-                    { val: '15 Mülk', label: 'Maksimum Portföy', sub: 'Özel Odak & Kişisel Hizmet' }
+                    { val: '%98', label: 'Müşteri Memnuniyeti', sub: 'Kişisel & Şeffaf Süreç' }
                   ].map((stat, idx) => (
                     <motion.div
                       key={idx}
@@ -704,7 +711,7 @@ export default function StandardDemoSite({ onReturn }) {
                     Butik Danışmanlık Metodolojisi
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Yüzlerce mülk arasında kaybolmak yerine, yalnızca 15 seçkin portföyle en üst düzey titizlikle çalışıyoruz.
+                    Yüzlerce ilanın arasında kaybolmak yerine, seçkin portföyümüz ve her mülke özel stratejimizle en üst düzey titizlikle çalışıyoruz.
                   </p>
                 </motion.div>
 
@@ -841,10 +848,10 @@ export default function StandardDemoSite({ onReturn }) {
                     </div>
 
                     <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
-                      <div className="text-3xl font-serif text-amber-200 font-bold">15 Mülk</div>
-                      <div className="text-xs font-semibold text-white">Yıllık Butik Kontenjan Limiti</div>
+                      <div className="text-3xl font-serif text-amber-200 font-bold">%100</div>
+                      <div className="text-xs font-semibold text-white">Doğrulanmış Portföy Ağı</div>
                       <p className="text-[11px] text-white/60 leading-relaxed">
-                        Her mülke hak ettiği şeffaf ve kusursuz zamanı ayırabilmek için kontenjanımız sınırlandırılmıştır.
+                        Tüm mülklerimiz ekspertiz, tapu ve belediye imar kayıtları hukuken onaylanmış olarak sunulur.
                       </p>
                     </div>
                   </div>

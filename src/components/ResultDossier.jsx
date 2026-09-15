@@ -16,7 +16,8 @@ import {
   Zap,
   Check,
   Eye,
-  X
+  X,
+  Lock
 } from 'lucide-react';
 import { ALL_PACKAGES } from '../data/packagesData';
 import { generateWhatsAppLink } from '../utils/whatsapp';
@@ -336,27 +337,32 @@ export default function ResultDossier({
                 </div>
               </div>
 
-              {/* Canlı Etkileşimli Demo Butonu */}
+              {/* Canlı Etkileşimli Demo Butonu (Kilitli) */}
               <button
                 type="button"
                 onClick={() => setPreviewTierModal('project')}
-                className="w-full mt-4 py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent border border-amber-400/60 hover:border-amber-400 text-amber-200 hover:text-white text-xs sm:text-sm flex items-center justify-between transition-all group cursor-pointer shadow-lg hover:shadow-amber-500/20"
+                className="w-full mt-4 py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent border border-amber-400/50 hover:border-amber-400 text-amber-200 hover:text-white text-xs sm:text-sm flex items-center justify-between transition-all group cursor-pointer shadow-lg hover:shadow-amber-500/20"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/60 flex items-center justify-center text-amber-300 group-hover:scale-110 transition-transform">
-                    <Eye className="w-5 h-5 text-amber-400" />
+                  <div className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                    <Lock className="w-5 h-5 text-amber-400" />
                   </div>
                   <div className="text-left">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 block font-bold">
-                      CANLI ETKİLEŞİMLİ DEMO
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 block font-bold">
+                        ÖZEL MİMARİ DEMO
+                      </span>
+                      <span className="px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[9px] font-mono font-bold">
+                        🔒 KİLİTLİ
+                      </span>
+                    </div>
                     <span className="text-architectural-white font-semibold text-sm">
-                      Örnek İnteraktif Proje Mimarisi Demosunu İncele (Kat Planı & Ünite Seçici)
+                      Örnek Proje Mimarisi Demosu (Erişim Korumalı • İncele)
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-amber-300 group-hover:translate-x-1 transition-transform text-xs font-mono font-bold">
-                  <span>Demoyu Aç</span>
+                <div className="flex items-center gap-2 text-amber-400 group-hover:translate-x-1 transition-transform text-xs font-mono font-bold">
+                  <span>Kilitli Demo</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </button>
@@ -507,18 +513,32 @@ export default function ResultDossier({
                         </ul>
                       </div>
 
-                      {/* Live Demo Preview Button */}
+                      {/* Live Demo Preview Button (Locked for Premium) */}
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setPreviewTierModal(pkg.id);
                         }}
-                        className="w-full mt-5 py-2.5 px-3 rounded-xl bg-white/[0.04] hover:bg-gold/15 border border-white/10 hover:border-gold/50 text-gold-light font-medium text-[11px] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs group/btn relative z-10"
+                        className={`w-full mt-5 py-2.5 px-3 rounded-xl border font-medium text-[11px] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs group/btn relative z-10 ${
+                          pkg.id === 'premium'
+                            ? 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-400/40 hover:border-amber-400 text-amber-300'
+                            : 'bg-white/[0.04] hover:bg-gold/15 border-white/10 hover:border-gold/50 text-gold-light'
+                        }`}
                       >
-                        <Eye className="w-3.5 h-3.5 text-gold group-hover/btn:scale-110 transition-transform" />
-                        <span>Örnek Siteyi İncele (Canlı Demo)</span>
-                        <ArrowRight className="w-3 h-3 text-gold/70 group-hover/btn:translate-x-0.5 transition-transform" />
+                        {pkg.id === 'premium' ? (
+                          <>
+                            <Lock className="w-3.5 h-3.5 text-amber-400 group-hover/btn:scale-110 transition-transform" />
+                            <span>Örnek Siteyi İncele (🔒 VIP Kilitli)</span>
+                            <ArrowRight className="w-3 h-3 text-amber-400/70 group-hover/btn:translate-x-0.5 transition-transform" />
+                          </>
+                        ) : (
+                          <>
+                            <Eye className="w-3.5 h-3.5 text-gold group-hover/btn:scale-110 transition-transform" />
+                            <span>Örnek Siteyi İncele (Canlı Demo)</span>
+                            <ArrowRight className="w-3 h-3 text-gold/70 group-hover/btn:translate-x-0.5 transition-transform" />
+                          </>
+                        )}
                       </button>
                     </div>
 
