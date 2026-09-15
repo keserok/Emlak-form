@@ -206,9 +206,6 @@ export default function StepCard({
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian/85 via-black/20 to-transparent pointer-events-none" />
-            <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[9px] font-mono tracking-widest text-gold uppercase shadow-sm">
-              {option.preview === 'portrait' ? 'Portre Kadrajı' : 'Mimari Başyapıt'}
-            </div>
           </div>
         )}
 
