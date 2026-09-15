@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, 
   MessageCircle, 
@@ -159,9 +160,16 @@ export default function StandardDemoSite({ onReturn }) {
 
       {/* Main View Router */}
       <div className="flex-1">
-        {viewMode === 'showcase' && (
-          <div className="animate-fade-in">
-            {/* Top Essential Header */}
+        <AnimatePresence mode="wait">
+          {viewMode === 'showcase' && (
+            <motion.div
+              key="showcase"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Top Essential Header */}
             <header className="bg-white/95 backdrop-blur-md border-b border-[#E8E4DC] sticky top-[41px] z-30 shadow-xs">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -325,30 +333,46 @@ export default function StandardDemoSite({ onReturn }) {
                     </h2>
                   </div>
 
-                  {/* Filter Pills */}
-                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                    {['Tümü', 'Taş Villa', 'Butik Konut', 'Teras Daire', 'Tarihi Konut'].map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedFilter(cat)}
-                        className={`px-3.5 py-1.5 rounded-full text-xs transition-colors cursor-pointer whitespace-nowrap ${
-                          selectedFilter === cat
-                            ? 'bg-[#2C3E35] text-white font-medium shadow-xs'
-                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
+                  {/* Filter Pills with animated layout indicator */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1 relative">
+                    {['Tümü', 'Taş Villa', 'Butik Konut', 'Teras Daire', 'Tarihi Konut'].map((cat) => {
+                      const isSelected = selectedFilter === cat;
+                      return (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => setSelectedFilter(cat)}
+                          className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer whitespace-nowrap z-10 ${
+                            isSelected
+                              ? 'text-white font-semibold'
+                              : 'text-slate-600 hover:text-[#2C3E35] bg-slate-100/80 hover:bg-slate-200/80'
+                          }`}
+                        >
+                          {isSelected && (
+                            <motion.div
+                              layoutId="standardFilterPill"
+                              className="absolute inset-0 bg-[#2C3E35] rounded-full shadow-xs -z-10"
+                              transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                            />
+                          )}
+                          <span>{cat}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                {/* Cards Grid with layout motion */}
+                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                   {filteredListings.map((item) => (
-                    <div
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.97 }}
+                      transition={{ duration: 0.25 }}
                       key={item.id}
-                      className="bg-[#FAF8F5] rounded-2xl border border-[#E8E4DC] overflow-hidden group hover:shadow-lg transition-all duration-300 flex flex-col"
+                      className="bg-[#FAF8F5] rounded-2xl border border-[#E8E4DC] overflow-hidden group hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
                     >
                       <div className="relative aspect-[16/10] overflow-hidden bg-slate-200">
                         <img
@@ -404,9 +428,9 @@ export default function StandardDemoSite({ onReturn }) {
                           </a>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
 
                 {filteredListings.length === 0 && (
                   <div className="text-center py-16 bg-[#FAF8F5] rounded-2xl border border-dashed border-[#DDD6CB]">
@@ -477,41 +501,56 @@ export default function StandardDemoSite({ onReturn }) {
                 </div>
               </div>
             </footer>
-          </div>
-        )}
+            </motion.div>
+          )}
 
-        {viewMode === 'form' && (
-          <div className="animate-fade-in py-8 sm:py-12">
-            <StandardInquiryForm 
-              onBackToShowcase={() => {
-                setViewMode('showcase');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              onAddSubmission={(newSub) => {
-                handleAddSubmission(newSub);
-              }}
-              agentProfile={agentProfile}
-            />
-          </div>
-        )}
+          {viewMode === 'form' && (
+            <motion.div
+              key="form"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="py-8 sm:py-12"
+            >
+              <StandardInquiryForm 
+                onBackToShowcase={() => {
+                  setViewMode('showcase');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onAddSubmission={(newSub) => {
+                  handleAddSubmission(newSub);
+                }}
+                agentProfile={agentProfile}
+              />
+            </motion.div>
+          )}
 
-        {viewMode === 'admin' && (
-          <div className="animate-fade-in py-6">
-            <StandardAdminPanel
-              agentProfile={agentProfile}
-              onUpdateProfile={handleUpdateProfile}
-              listings={listings}
-              onUpdateListings={handleUpdateListings}
-              submissions={submissions}
-              onUpdateSubmissionStatus={handleUpdateSubmissionStatus}
-              onPreviewShowcase={() => {
-                setViewMode('showcase');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              onPublish={handlePublish}
-            />
-          </div>
-        )}
+          {viewMode === 'admin' && (
+            <motion.div
+              key="admin"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="py-6"
+            >
+              <StandardAdminPanel
+                agentProfile={agentProfile}
+                onUpdateProfile={handleUpdateProfile}
+                listings={listings}
+                onUpdateListings={handleUpdateListings}
+                submissions={submissions}
+                onUpdateSubmissionStatus={handleUpdateSubmissionStatus}
+                onPreviewShowcase={() => {
+                  setViewMode('showcase');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onPublish={handlePublish}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Bottom Switcher Dock (Identical to upper tier package) */}

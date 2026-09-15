@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AppStateProvider, useAppState } from './context/AppStateContext';
 import TopBarSwitcher from './components/common/TopBarSwitcher';
 import Navbar from './components/showcase/Navbar';
@@ -51,33 +52,43 @@ function MainContent({ onReturn }) {
       </div>
 
       {/* Main View Router */}
-      {viewMode === 'showcase' ? (
-        <main>
-          <Navbar />
-          <HeroSection />
-          <TrustStatsBar />
-          <FeaturedListings />
-          <NeighborhoodGuide />
-          <AboutSection />
-          <ListingProcess />
-          {/* Mülk Değerleme & Talep Formu (Direct customer access) */}
-          <section id="degerleme" className="scroll-mt-20 py-16 sm:py-20 bg-[#FAF8F5] border-t border-[#E8E2D9]">
-            <PropertyInquiryForm isEmbedded={true} />
-          </section>
-          <ContactSection />
-          <Footer />
-          <PropertyModal />
-          <MobileQuickDock />
-        </main>
-      ) : viewMode === 'form' ? (
-        <main className="py-8">
-          <PropertyInquiryForm isEmbedded={false} />
-        </main>
-      ) : (
-        <main className="py-8">
-          <AdminLayout />
-        </main>
-      )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={viewMode}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {viewMode === 'showcase' ? (
+            <main>
+              <Navbar />
+              <HeroSection />
+              <TrustStatsBar />
+              <FeaturedListings />
+              <NeighborhoodGuide />
+              <AboutSection />
+              <ListingProcess />
+              {/* Mülk Değerleme & Talep Formu (Direct customer access) */}
+              <section id="degerleme" className="scroll-mt-20 py-16 sm:py-20 bg-[#FAF8F5] border-t border-[#E8E2D9]">
+                <PropertyInquiryForm isEmbedded={true} />
+              </section>
+              <ContactSection />
+              <Footer />
+              <PropertyModal />
+              <MobileQuickDock />
+            </main>
+          ) : viewMode === 'form' ? (
+            <main className="py-8">
+              <PropertyInquiryForm isEmbedded={false} />
+            </main>
+          ) : (
+            <main className="py-8">
+              <AdminLayout />
+            </main>
+          )}
+        </motion.div>
+      </AnimatePresence>
 
       {/* Selin Karaca Switcher Dock */}
       <TopBarSwitcher />
