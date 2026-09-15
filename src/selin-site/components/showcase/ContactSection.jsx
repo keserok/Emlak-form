@@ -36,13 +36,8 @@ export default function ContactSection() {
 
           <button
             onClick={() => {
-              const el = document.getElementById('degerleme');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                setViewMode('form');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
+              setViewMode('form');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#8A735C] hover:bg-[#a38053] text-white text-sm font-semibold transition-colors cursor-pointer shadow-md"
           >

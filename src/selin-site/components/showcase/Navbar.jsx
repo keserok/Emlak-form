@@ -37,20 +37,8 @@ export default function Navbar() {
 
   const handleOpenForm = (e) => {
     e?.preventDefault();
-    if (viewMode !== 'showcase') {
-      setViewMode('showcase');
-      setTimeout(() => {
-        const el = document.getElementById('degerleme');
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      const el = document.getElementById('degerleme');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    setViewMode('form');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
 

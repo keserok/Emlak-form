@@ -763,7 +763,7 @@ export default function StandardInquiryForm({ onBackToShowcase, onAddSubmission,
                 ) : (
                   <>
                     <CheckCircle2 className="w-4 h-4" />
-                    <span>Talebi Kaydet ve Danışmana İlet</span>
+                    <span>Talebi İlet</span>
                   </>
                 )}
               </button>

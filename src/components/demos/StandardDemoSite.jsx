@@ -5,14 +5,21 @@ import {
   MessageCircle, 
   Star, 
   MapPin,
-  Compass,
-  Building,
-  CheckCircle2,
-  FileText,
-  LayoutDashboard,
-  ShieldCheck,
-  ChevronRight,
-  ArrowRight
+  Compass, 
+  Building, 
+  CheckCircle2, 
+  FileText, 
+  LayoutDashboard, 
+  ShieldCheck, 
+  ChevronRight, 
+  ArrowRight,
+  Award,
+  Clock,
+  Key,
+  Quote,
+  Check,
+  Search,
+  Users
 } from 'lucide-react';
 import StandardTopBar from './standard/StandardTopBar';
 import StandardBottomSwitcher from './standard/StandardBottomSwitcher';
@@ -23,6 +30,89 @@ import {
   initialStandardListings, 
   initialStandardSubmissions 
 } from './standard/standardInitialData';
+
+const BOUTIQUE_REGIONS = [
+  {
+    id: 'urla',
+    name: 'Urla Bağ Yolu & Keklicek',
+    subtitle: 'Zeytinlikler & Taş Konaklar',
+    desc: 'Huzurlu gastronomi rotası, bağ evleri ve yıl boyu sakin müstakil yaşam.',
+    image: 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=800&q=80',
+    tag: 'Sakin Yaşam'
+  },
+  {
+    id: 'alacati',
+    name: 'Alaçatı Tarihi Doku',
+    subtitle: 'Otantik Taş Mimari',
+    desc: 'Tescilli Rum mimarisi, cumbalı avlular ve seçkin butik sokaklar.',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    tag: 'Tarihi Doku'
+  },
+  {
+    id: 'cesme',
+    name: 'Çeşme Yarımadası & Marina',
+    subtitle: 'Deniz & Modern Konfor',
+    desc: 'Ege Denizi\'ne sıfır panoramik villalar, özel plaj erişimi ve yat yaşamı.',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    tag: 'Panoramik Deniz'
+  },
+  {
+    id: 'bodrum',
+    name: 'Bodrum Sakin Koylar',
+    subtitle: 'Müstakil Malikâneler',
+    desc: 'Off-market özel villalar, mandalina bahçeleri ve turkuaz sular.',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+    tag: 'VIP Off-Market'
+  }
+];
+
+const ADVISORY_STEPS = [
+  {
+    number: '01',
+    title: 'Mahremiyet & Ön Tespit',
+    desc: 'Mülkünüz kamuya açık platformlarda sıradan bir ilan haline gelmeden, gizliliğiniz korunarak yüz yüze incelenir.',
+    icon: ShieldCheck
+  },
+  {
+    number: '02',
+    title: 'Hukuki & Mimari Ekspertiz',
+    desc: 'Tapu kayıtları, sit sınırları, imar durumu ve mimari projeler bağımsız teknik ekiplerce önceden doğrulanır.',
+    icon: FileText
+  },
+  {
+    number: '03',
+    title: 'Doğru Emsal Değerleme',
+    desc: 'Şişirilmiş spekülatif fiyatlar yerine, bölgedeki gerçek noter/satış emsalleriyle doğru piyasa değeri saptanır.',
+    icon: Award
+  },
+  {
+    number: '04',
+    title: 'Nitelikli Alıcı Eşleştirmesi',
+    desc: 'Zamanınızı alacak turist ziyaretçiler yerine, yalnızca satın alma niyeti ve bütçesi teyitli alıcılarla özel randevular.',
+    icon: Users
+  }
+];
+
+const CLIENT_TESTIMONIALS = [
+  {
+    quote: 'Urla Keklicek\'teki taş evimizi sadece 3 hafta içerisinde, hiçbir gereksiz telefon karmaşası yaşamadan tam aradığımız profilde bir aileye devrettik.',
+    author: 'Dr. Levent & Selen E.',
+    role: 'Mülk Sahibi • Urla Keklicek',
+    stars: 5
+  },
+  {
+    quote: 'İstanbul\'dan Alaçatı\'ya yerleşirken bölgedeki tüm imar ve mimari riskleri açık yüreklilikle önümüze koydu. Sayesinde güvenle taşındık.',
+    author: 'Hande K.',
+    role: 'Alıcı • Alaçatı Taş Villa',
+    stars: 5
+  },
+  {
+    quote: 'Yüzlerce kopyalanmış ve güncel olmayan ilanın içinde kaybolmak yerine, Deniz Bey ile sadece 2 hedef mülk gezerek doğru evi bulduk.',
+    author: 'Murat & Pelin D.',
+    role: 'Alıcı • Bodrum Sakin Koy',
+    stars: 5
+  }
+];
 
 export default function StandardDemoSite({ onReturn }) {
   // Navigation state: 'showcase' | 'form' | 'admin'
@@ -173,9 +263,6 @@ export default function StandardDemoSite({ onReturn }) {
             <header className="bg-white/95 backdrop-blur-md border-b border-[#E8E4DC] sticky top-[41px] z-30 shadow-xs">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#2C3E35] text-white flex items-center justify-center font-serif font-bold text-sm shadow-xs">
-                    DA
-                  </div>
                   <div>
                     <span className="font-serif font-bold text-sm tracking-wider text-[#2C3E35] block">
                       {agentProfile.name?.toUpperCase() || 'DENİZ ARSLAN'}
@@ -217,7 +304,7 @@ export default function StandardDemoSite({ onReturn }) {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <div className="md:col-span-7 space-y-5">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EDE8E0] text-[#5A4B3D] text-[11px] font-semibold tracking-wider uppercase border border-[#DDD6CB]">
+                  <div className="inline-flex items-center gap-2 text-[#7C6A59] text-[11px] font-semibold tracking-wider uppercase">
                     <Compass className="w-3.5 h-3.5 text-[#7C6A59]" />
                     <span>{agentProfile.badge || 'Butik Danışmanlık • Maksimum 15 Seçkin Portföy'}</span>
                   </div>
@@ -307,9 +394,6 @@ export default function StandardDemoSite({ onReturn }) {
                       <div className="text-[11px] text-[#7C6A59] font-medium mt-0.5">
                         {agentProfile.region || 'Urla • Çeşme • Alaçatı • Bodrum'}
                       </div>
-                      <div className="text-[10px] text-slate-400 mt-1 font-mono">
-                        Yetki No: 3501248 • Doğrulanmış Butik Danışman
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -323,10 +407,8 @@ export default function StandardDemoSite({ onReturn }) {
                 
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                   <div>
-                    <div className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#7C6A59]">
+                    <div className="text-[11px] font-bold uppercase tracking-widest text-[#7C6A59]">
                       <span>Seçkin Butik Vitrin</span>
-                      <span className="text-slate-300">•</span>
-                      <span className="text-emerald-700">{activeCount}/15 Aktif Kontenjan</span>
                     </div>
                     <h2 className="font-serif text-2xl sm:text-3xl text-[#1E2522] font-medium mt-1">
                       Karakterli Mülk Seçkisi
@@ -487,8 +569,289 @@ export default function StandardDemoSite({ onReturn }) {
               </div>
             </section>
 
+            {/* 1. Prestige Stats & Metrics Strip */}
+            <section className="py-12 sm:py-16 bg-[#2C3E35] text-white">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                  {[
+                    { val: '₺480M+', label: 'Tamamlanan İşlem Hacmi', sub: 'Ege & Akdeniz Butik Portföy' },
+                    { val: '16 Gün', label: 'Ortalama Nitelikli Eşleşme', sub: 'Hedef Alıcı Portföyüyle' },
+                    { val: '%100', label: 'Hukuki Güvence', sub: 'Doğrulanmış Tapu & Ekspertiz' },
+                    { val: '15 Mülk', label: 'Maksimum Portföy', sub: 'Özel Odak & Kişisel Hizmet' }
+                  ].map((stat, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="space-y-1.5"
+                    >
+                      <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-200">
+                        {stat.val}
+                      </div>
+                      <div className="text-xs sm:text-sm font-semibold text-white/90">
+                        {stat.label}
+                      </div>
+                      <div className="text-[10px] text-white/60">
+                        {stat.sub}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 2. Editorial Region & Lifestyle Guide */}
+            <section className="py-16 sm:py-24 bg-[#FAF8F5] border-b border-[#E8E4DC]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center max-w-2xl mx-auto mb-12 space-y-2"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C6A59]">
+                    Lokasyon & Karakter
+                  </span>
+                  <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1E2522] font-medium">
+                    Ege & Akdeniz Editoryal Seçkisi
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Sakin yaşamın, tescilli taş mimarinin ve huzurlu kıyı kasabalarının özenle seçilmiş lokasyonları.
+                  </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {BOUTIQUE_REGIONS.map((reg, idx) => (
+                    <motion.div
+                      key={reg.id}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.12 }}
+                      className="group bg-white rounded-2xl border border-[#E8E4DC] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col"
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
+                        <img 
+                          src={reg.image} 
+                          alt={reg.name}
+                          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out" 
+                        />
+                        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs text-[#2C3E35] text-[10px] font-bold uppercase px-2.5 py-1 rounded-full shadow-xs">
+                          {reg.tag}
+                        </div>
+                      </div>
+
+                      <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                          <h3 className="font-serif font-bold text-base text-[#1E2522] group-hover:text-[#2C3E35] transition-colors">
+                            {reg.name}
+                          </h3>
+                          <div className="text-[11px] text-[#7C6A59] font-medium mt-0.5">
+                            {reg.subtitle}
+                          </div>
+                          <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                            {reg.desc}
+                          </p>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedFilter('Tümü');
+                            const el = document.getElementById('portfoy');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#2C3E35] hover:text-emerald-700 transition-colors pt-2 border-t border-slate-100 cursor-pointer"
+                        >
+                          <span>Portföyleri Gör</span>
+                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+              </div>
+            </section>
+
+            {/* 3. Advisory Methodology */}
+            <section className="py-16 sm:py-24 bg-white border-b border-[#E8E4DC]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center max-w-2xl mx-auto mb-14 space-y-2"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C6A59]">
+                    Felsefemiz & Yaklaşımımız
+                  </span>
+                  <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1E2522] font-medium">
+                    Butik Danışmanlık Metodolojisi
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Yüzlerce mülk arasında kaybolmak yerine, yalnızca 15 seçkin portföyle en üst düzey titizlikle çalışıyoruz.
+                  </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {ADVISORY_STEPS.map((step, idx) => {
+                    const StepIcon = step.icon;
+                    return (
+                      <motion.div
+                        key={step.number}
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: idx * 0.12 }}
+                        className="bg-[#FAF8F5] p-6 rounded-2xl border border-[#E8E4DC] hover:border-[#2C3E35]/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="font-serif text-2xl font-bold text-[#7C6A59]/40">
+                              {step.number}
+                            </span>
+                            <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E4DC] flex items-center justify-center text-[#2C3E35] shadow-xs">
+                              <StepIcon className="w-4.5 h-4.5 text-[#2C3E35]" />
+                            </div>
+                          </div>
+                          <h3 className="font-serif font-bold text-base text-[#1E2522]">
+                            {step.title}
+                          </h3>
+                          <p className="text-xs text-slate-600 leading-relaxed">
+                            {step.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </section>
+
+            {/* 4. Client Testimonials */}
+            <section className="py-16 sm:py-24 bg-[#FAF8F5] border-b border-[#E8E4DC]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center max-w-2xl mx-auto mb-14 space-y-2"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C6A59]">
+                    Gerçek Deneyimler
+                  </span>
+                  <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1E2522] font-medium">
+                    Seçkin Mülk Sahipleri Ne Diyor?
+                  </h2>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {CLIENT_TESTIMONIALS.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.12 }}
+                      className="bg-white p-7 rounded-3xl border border-[#E8E4DC] shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-5"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-1 text-amber-500">
+                          {[...Array(item.stars)].map((_, i) => (
+                            <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                        <Quote className="w-8 h-8 text-[#DDD6CB] stroke-[1.5]" />
+                        <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
+                          "{item.quote}"
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-100">
+                        <div className="font-serif font-bold text-sm text-[#1E2522]">
+                          {item.author}
+                        </div>
+                        <div className="text-[11px] text-[#7C6A59]">
+                          {item.role}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+              </div>
+            </section>
+
+            {/* 5. Consultant Personal Manifesto & Direct Valuation CTA */}
+            <section className="py-16 sm:py-24 bg-white border-b border-[#E8E4DC]">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                <div className="bg-gradient-to-br from-[#2C3E35] to-[#1E2522] rounded-3xl p-8 sm:p-14 text-white shadow-2xl relative overflow-hidden">
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div className="lg:col-span-8 space-y-4">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-300 text-[11px] font-semibold tracking-widest uppercase border border-white/10">
+                        <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
+                        <span>Kişisel Değerleme & Portföy Başvurusu</span>
+                      </div>
+
+                      <h2 className="font-serif text-2xl sm:text-4xl text-white font-medium leading-tight">
+                        Mülkünüzü Doğru Değerinde Sakin Alıcı Ağına Sunun
+                      </h2>
+
+                      <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xl">
+                        Kişisel portföyümde sınırlı kontenjanla yer almak, gerçek piyasa emsalleriyle değerleme yaptırmak ve gizlilik prensibiyle doğru alıcıyla buluşmak için formumuzu doldurabilirsiniz.
+                      </p>
+
+                      <div className="pt-4 flex flex-wrap items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setViewMode('form');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-slate-900 font-bold text-xs transition-all shadow-lg flex items-center gap-2 cursor-pointer active:scale-95"
+                        >
+                          <FileText className="w-4 h-4 text-slate-900" />
+                          <span>Mülk Değerleme & Talep Formunu Başlat</span>
+                        </button>
+
+                        <a
+                          href={`https://wa.me/${agentProfile.phone?.replace(/[^0-9]/g, '') || '905324112026'}?text=${encodeURIComponent('Merhaba Deniz Bey, mülkümü butik portföyünüzde değerlendirmek istiyorum.')}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs transition-colors flex items-center gap-2 cursor-pointer"
+                        >
+                          <MessageCircle className="w-4 h-4 text-emerald-400" />
+                          <span>WhatsApp Doğrudan Danışın</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
+                      <div className="text-3xl font-serif text-amber-200 font-bold">15 Mülk</div>
+                      <div className="text-xs font-semibold text-white">Yıllık Butik Kontenjan Limiti</div>
+                      <p className="text-[11px] text-white/60 leading-relaxed">
+                        Her mülke hak ettiği şeffaf ve kusursuz zamanı ayırabilmek için kontenjanımız sınırlandırılmıştır.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
             {/* Footer */}
-            <footer className="py-10 bg-[#FAF8F5] text-center border-t border-[#E8E4DC] text-xs text-slate-500">
+            <footer className="py-12 bg-[#FAF8F5] text-center border-t border-[#E8E4DC] text-xs text-slate-500">
               <div className="max-w-6xl mx-auto px-4 space-y-2">
                 <div className="font-serif font-bold text-sm text-[#2C3E35]">
                   {agentProfile.name || 'Deniz Arslan'} • Butik Gayrimenkul Danışmanlığı

@@ -69,10 +69,6 @@ function MainContent({ onReturn }) {
               <NeighborhoodGuide />
               <AboutSection />
               <ListingProcess />
-              {/* Mülk Değerleme & Talep Formu (Direct customer access) */}
-              <section id="degerleme" className="scroll-mt-20 py-16 sm:py-20 bg-[#FAF8F5] border-t border-[#E8E2D9]">
-                <PropertyInquiryForm isEmbedded={true} />
-              </section>
               <ContactSection />
               <Footer />
               <PropertyModal />

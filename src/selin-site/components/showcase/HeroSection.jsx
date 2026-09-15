@@ -17,13 +17,8 @@ export default function HeroSection() {
 
   const handleOpenForm = (e) => {
     e?.preventDefault();
-    const el = document.getElementById('degerleme');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setViewMode('form');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    setViewMode('form');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
