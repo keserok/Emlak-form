@@ -8,11 +8,13 @@ import {
   Check, 
   Crown,
   Zap,
-  Building
+  Building,
+  Building2
 } from 'lucide-react';
 import StandardDemoSite from './StandardDemoSite';
 import AdvancedDemoSite from './AdvancedDemoSite';
 import PremiumDemoSite from './PremiumDemoSite';
+import ProjectDemoSite from './ProjectDemoSite';
 
 export default function PackageDemoModal({ 
   initialTier = 'advanced', 
@@ -40,6 +42,12 @@ export default function PackageDemoModal({
       subtitle: 'Aureus Monolith • Private Luxury & Off-Market Estates',
       badge: 'Ultra-Lüks Sanat Mimarisi',
       badgeColor: 'bg-[#D4AF37]/20 text-[#D4AF37] border-[#D4AF37]/40'
+    },
+    project: {
+      name: 'Büyük Gayrimenkul Projeleri',
+      subtitle: 'Viera Residence & Panorama • İnteraktif Ünite Seçici & Lansman',
+      badge: 'İnteraktif & Dinamik Altyapı',
+      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40'
     }
   };
 
@@ -120,6 +128,18 @@ export default function PackageDemoModal({
             <Crown className="w-3.5 h-3.5" />
             <span>Premium</span>
           </button>
+
+          <button
+            onClick={() => setActiveTier('project')}
+            className={`px-3 py-1.5 rounded-xl font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+              activeTier === 'project'
+                ? 'bg-amber-500/30 text-amber-300 font-bold border border-amber-500/50 shadow-sm'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Building2 className="w-3.5 h-3.5 text-amber-400" />
+            <span>Büyük Projeler</span>
+          </button>
         </div>
 
         {/* Right: Device Switcher & Choose CTA */}
@@ -182,6 +202,7 @@ export default function PackageDemoModal({
             {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
             {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
             {activeTier === 'premium' && <PremiumDemoSite />}
+            {activeTier === 'project' && <ProjectDemoSite />}
           </div>
         )}
 
@@ -194,6 +215,7 @@ export default function PackageDemoModal({
               {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
               {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
               {activeTier === 'premium' && <PremiumDemoSite />}
+              {activeTier === 'project' && <ProjectDemoSite />}
             </div>
           </div>
         )}
@@ -210,6 +232,7 @@ export default function PackageDemoModal({
               {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
               {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
               {activeTier === 'premium' && <PremiumDemoSite />}
+              {activeTier === 'project' && <ProjectDemoSite />}
             </div>
           </div>
         )}

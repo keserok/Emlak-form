@@ -38,6 +38,14 @@ export const STEPS_DATA = [
         desc: "İmar analizleri, parsel verileri ve kurumsal gayrimenkul yatırımcılarına yönelik özel sunum.",
         badge: "Büyük Ölçekli Fon",
         icon: "Layers"
+      },
+      {
+        id: "E",
+        value: "large_development",
+        title: "Büyük Ölçekli Gayrimenkul & İnşaat Projesi",
+        desc: "Tek bir markalı konut, karma yaşam veya villa projesi için bağımsız dijital lansman ve satış vitrini.",
+        badge: "İnşaat & Proje Geliştirici",
+        icon: "Building2"
       }
     ]
   },
@@ -115,6 +123,16 @@ export const STEPS_DATA = [
         desc: "Bölgenin mimari dokusunu ve seçkin mülk estetiğini sinematik açıdan yansıtan editoryal çekim.",
         badge: "Mimari Atmosfer",
         icon: "Image",
+        preview: "architecture",
+        image: "/images/luxury-villa.jpg"
+      },
+      {
+        id: "C",
+        value: "project_architecture",
+        title: "Proje Mimarisi & Sinematik Lansman Çekimi",
+        desc: "Projenin mimari çizgilerini, cephe karakterini ve prestijini öne çıkaran sinematik karşılama.",
+        badge: "Proje Prestiji",
+        icon: "Building2",
         preview: "architecture",
         image: "/images/luxury-villa.jpg"
       }
@@ -202,6 +220,14 @@ export const STEPS_DATA = [
         desc: "“Telefonu açıyoruz, çekinmeden arayın” garantili şeffaf ve direkt arama hattı.",
         badge: "Doğrudan Sesli İletişim",
         icon: "PhoneCall"
+      },
+      {
+        id: "E",
+        value: "project_sales_office",
+        title: "Satış Ofisi Randevusu & Kat Planı İndirme",
+        desc: "Müşterilerin anında kat planı broşürünü incelediği ve satış ofisiyle VIP görüşme başlattığı köprü.",
+        badge: "Proje Satış Odaklı",
+        icon: "Building2"
       }
     ]
   },
@@ -236,6 +262,14 @@ export const STEPS_DATA = [
         desc: "Her danışman için bağımsız biyografi sayfası, kişisel portföy koleksiyonu ve direkt iletişim hattı.",
         badge: "Kurumsal Ofis Gücü",
         icon: "Network"
+      },
+      {
+        id: "D",
+        value: "project_inventory_panel",
+        title: "Dinamik Proje & Ünite Stok Paneli",
+        desc: "Blok, kat ve daire bazında satıldı/satılık durumları, kat planları ve daire tiplerinin yönetildiği proje paneli.",
+        badge: "İnteraktif & Dinamik Altyapı",
+        icon: "Boxes"
       }
     ]
   },

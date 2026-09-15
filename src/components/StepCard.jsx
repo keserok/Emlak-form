@@ -25,6 +25,8 @@ import {
   Globe,
   Box,
   Zap,
+  Building2,
+  Boxes,
   Check
 } from 'lucide-react';
 
@@ -52,7 +54,9 @@ const ICON_MAP = {
   Star,
   Globe,
   Box,
-  Zap
+  Zap,
+  Building2,
+  Boxes
 };
 
 export default function StepCard({

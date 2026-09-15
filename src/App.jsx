@@ -8,7 +8,6 @@ import StepContainer from './components/StepContainer';
 import ResultDossier from './components/ResultDossier';
 import VaultUnlockFx from './components/VaultUnlockFx';
 import AdminDashboard from './components/admin/AdminDashboard';
-import AdvancedDemoSite from './components/demos/AdvancedDemoSite';
 import StandardDemoSite from './components/demos/StandardDemoSite';
 import SelinKaracaEmbed from './selin-site/SelinKaracaEmbed';
 import { STEPS_DATA } from './data/stepsData';

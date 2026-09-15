@@ -7,6 +7,8 @@ import {
   CheckCircle2,
   ShieldCheck,
   Building,
+  Building2,
+  Sparkles,
   Phone,
   Award,
   ArrowRight,
@@ -134,14 +136,15 @@ export default function ResultDossier({
           )}
         </div>
 
-        {/* 3. Paket Kartları (Her Birinin Kendi Altında 5 Maddesiyle Birlikte) */}
+        {/* 3. Paket Kartları (Her Birinin Kendi Altında Maddeleriyle Birlikte) */}
         <div className="mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {ALL_PACKAGES.map((pkg) => {
               const isRecommended = pkg.id === recommendedTier;
               const isSelected = pkg.id === selectedTier;
 
               // Unique animation & styling tiers
+              const isProject = pkg.id === 'project';
               const isAdvanced = pkg.id === 'advanced';
               const isPremium = pkg.id === 'premium';
 
@@ -151,10 +154,12 @@ export default function ResultDossier({
                   onClick={() => handleSelectTier(pkg.id)}
                   whileHover={{ y: -3, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.98 }}
-                  className={`group relative rounded-3xl p-6 sm:p-7 cursor-pointer transition-all duration-500 overflow-hidden flex flex-col justify-between ${
+                  className={`group relative rounded-3xl p-5 sm:p-6 cursor-pointer transition-all duration-500 overflow-hidden flex flex-col justify-between ${
                     // Refined luxury borders and calm depth
                     isSelected
-                      ? isPremium
+                      ? isProject
+                        ? 'bg-gradient-to-b from-amber-500/[0.14] via-white/[0.03] to-obsidian border-2 border-amber-400/90 shadow-[0_0_30px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/40'
+                        : isPremium
                         ? 'bg-gradient-to-b from-gold/[0.12] via-white/[0.03] to-obsidian border-2 border-gold shadow-[0_0_30px_rgba(212,175,55,0.25)] ring-1 ring-gold/40'
                         : isAdvanced
                         ? 'bg-gradient-to-b from-blue-500/[0.06] via-white/[0.03] to-obsidian border-2 border-gold/80 shadow-[0_0_25px_rgba(212,175,55,0.2)] ring-1 ring-gold/30'
@@ -162,6 +167,18 @@ export default function ResultDossier({
                       : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
                   }`}
                 >
+                  {/* Subtle Top Rim Laser Line for Büyük Proje */}
+                  {isSelected && isProject && (
+                    <div className="absolute top-0 left-0 right-0 h-[1.5px] overflow-hidden pointer-events-none">
+                      <motion.div
+                        initial={{ x: '-100%' }}
+                        animate={{ x: '100%' }}
+                        transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
+                        className="w-1/2 h-full bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_8px_rgba(245,158,11,0.9)]"
+                      />
+                    </div>
+                  )}
+
                   {/* Subtle Top Rim Laser Line for Premium */}
                   {isSelected && isPremium && (
                     <div className="absolute top-0 left-0 right-0 h-[1.5px] overflow-hidden pointer-events-none">
@@ -193,11 +210,15 @@ export default function ResultDossier({
                         <div
                           className={`w-9 h-9 rounded-2xl flex items-center justify-center transition-all duration-300 ${
                             isSelected
-                              ? 'bg-gold text-obsidian shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                              ? isProject
+                                ? 'bg-amber-400 text-obsidian shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                                : 'bg-gold text-obsidian shadow-[0_0_15px_rgba(212,175,55,0.4)]'
                               : 'bg-white/[0.04] text-gold-light border border-white/10'
                           }`}
                         >
-                          {isPremium ? (
+                          {isProject ? (
+                            <Building2 className="w-4 h-4" />
+                          ) : isPremium ? (
                             <Crown className="w-4 h-4" />
                           ) : isAdvanced ? (
                             <Zap className="w-4 h-4" />
@@ -207,8 +228,15 @@ export default function ResultDossier({
                         </div>
 
                         {isRecommended && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-gold/20 border border-gold/50 text-[9px] font-mono tracking-wider text-gold-light font-bold">
+                          <span className="px-2 py-0.5 rounded-full bg-gold/20 border border-gold/50 text-[9px] font-mono tracking-wider text-gold-light font-bold">
                             ⭐ ÖNERİLEN
+                          </span>
+                        )}
+
+                        {pkg.interactiveBadge && !isRecommended && (
+                          <span className="px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/50 text-[9px] font-mono tracking-wider text-amber-300 font-bold flex items-center gap-1">
+                            <Sparkles className="w-2.5 h-2.5 text-amber-400" />
+                            <span>İNTERAKTİF</span>
                           </span>
                         )}
                       </div>
@@ -217,7 +245,9 @@ export default function ResultDossier({
                       <div
                         className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-300 ${
                           isSelected
-                            ? 'border-gold bg-gold text-obsidian shadow-[0_0_10px_rgba(212,175,55,0.5)]'
+                            ? isProject
+                              ? 'border-amber-400 bg-amber-400 text-obsidian shadow-[0_0_10px_rgba(245,158,11,0.5)]'
+                              : 'border-gold bg-gold text-obsidian shadow-[0_0_10px_rgba(212,175,55,0.5)]'
                             : 'border-white/20 bg-white/[0.02]'
                         }`}
                       >
@@ -230,15 +260,15 @@ export default function ResultDossier({
                       <span className="text-[10px] font-mono uppercase tracking-widest text-architectural-subtle block mb-1">
                         {pkg.badge}
                       </span>
-                      <h4 className="font-serif text-xl sm:text-2xl text-architectural-white font-medium mb-1 group-hover:text-gold-light transition-colors">
+                      <h4 className="font-serif text-lg sm:text-xl text-architectural-white font-medium mb-1 group-hover:text-gold-light transition-colors">
                         {pkg.name}
                       </h4>
-                      <p className="text-xs text-gold/90 font-medium mb-4">
+                      <p className="text-xs text-gold/90 font-medium mb-3">
                         {pkg.target}
                       </p>
                     </div>
 
-                    {/* 5 Distinct Feature Items per Package */}
+                    {/* Distinct Feature Items per Package */}
                     <div className="pt-3 border-t border-white/10 relative z-10">
                       {pkg.itemsPrefix ? (
                         <div className="text-[10px] font-mono uppercase tracking-widest text-gold-light font-semibold mb-2.5">
@@ -254,19 +284,21 @@ export default function ResultDossier({
                         {pkg.items.map((item, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-2.5 text-xs text-architectural-muted leading-relaxed"
+                            className="flex items-start gap-2 text-xs text-architectural-muted leading-relaxed"
                           >
                             <div
                               className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
                                 isSelected
-                                  ? 'bg-gold/20 text-gold border border-gold/40'
+                                  ? isProject
+                                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                                    : 'bg-gold/20 text-gold border border-gold/40'
                                   : 'bg-white/[0.04] text-architectural-subtle border border-white/10'
                               }`}
                             >
                               <CheckCircle2 className="w-3 h-3" />
                             </div>
                             <span
-                              className={`transition-colors ${
+                              className={`transition-colors text-[11px] sm:text-xs ${
                                 isSelected ? 'text-architectural-white font-normal' : 'text-architectural-muted/90'
                               }`}
                             >
@@ -275,6 +307,14 @@ export default function ResultDossier({
                           </li>
                         ))}
                       </ul>
+
+                      {/* Özel İletişim Uyarısı */}
+                      {pkg.contactNotice && (
+                        <div className="mt-3.5 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[10px] text-amber-200/95 leading-snug font-mono flex items-start gap-1.5">
+                          <span className="text-amber-400 shrink-0 mt-0.5">✦</span>
+                          <span>{pkg.contactNotice}</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Live Demo Preview Button for this Package */}
@@ -287,15 +327,15 @@ export default function ResultDossier({
                       className="w-full mt-4 py-2 px-3 rounded-xl bg-white/[0.04] hover:bg-gold/15 border border-white/10 hover:border-gold/50 text-gold-light font-medium text-[11px] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs group/btn relative z-10"
                     >
                       <Eye className="w-3.5 h-3.5 text-gold group-hover/btn:scale-110 transition-transform" />
-                      <span>Örnek Siteyi İncele (Canlı Demo)</span>
+                      <span>{isProject ? 'İnteraktif Mimariyi İncele' : 'Örnek Siteyi İncele (Canlı Demo)'}</span>
                       <ArrowRight className="w-3 h-3 text-gold/70 group-hover/btn:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
 
                   {/* Card Bottom: Delivery time & In-Button Selection Animation */}
                   <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between relative z-10 text-xs font-mono">
-                    <div className="flex items-center gap-1.5 text-architectural-muted">
-                      <Clock className="w-3.5 h-3.5 text-gold/80" />
+                    <div className="flex items-center gap-1 text-[11px] text-architectural-muted">
+                      <Clock className="w-3 h-3 text-gold/80" />
                       <span>{pkg.deliveryDays}</span>
                     </div>
 
@@ -303,7 +343,9 @@ export default function ResultDossier({
                     {isSelected ? (
                       <div
                         className={`relative overflow-hidden px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all duration-300 ${
-                          isPremium
+                          isProject
+                            ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-orange-400 text-obsidian shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                            : isPremium
                             ? 'bg-gradient-to-r from-gold via-gold-shimmer to-gold-bronze text-obsidian shadow-[0_0_15px_rgba(212,175,55,0.4)]'
                             : isAdvanced
                             ? 'bg-white/[0.08] border border-gold/70 text-gold-light shadow-[0_0_12px_rgba(212,175,55,0.2)]'
@@ -311,13 +353,13 @@ export default function ResultDossier({
                         }`}
                       >
                         {/* Internal Traveling Laser Sheen (contained strictly inside the button) */}
-                        {(isPremium || isAdvanced) && (
+                        {(isProject || isPremium || isAdvanced) && (
                           <motion.div
                             initial={{ x: '-100%' }}
                             animate={{ x: '200%' }}
-                            transition={{ repeat: Infinity, duration: isPremium ? 2.5 : 3.2, ease: 'linear' }}
+                            transition={{ repeat: Infinity, duration: isProject ? 2.5 : isPremium ? 2.5 : 3.2, ease: 'linear' }}
                             className={`absolute inset-0 bg-gradient-to-r from-transparent ${
-                              isPremium ? 'via-white/40' : 'via-gold/30'
+                              isProject ? 'via-white/50' : isPremium ? 'via-white/40' : 'via-gold/30'
                             } to-transparent pointer-events-none -skew-x-12`}
                           />
                         )}
@@ -325,7 +367,7 @@ export default function ResultDossier({
                         <span className="relative z-10">Seçildi</span>
                       </div>
                     ) : (
-                      <div className="px-3.5 py-1.5 rounded-full bg-white/[0.02] border border-white/10 group-hover:border-gold/40 group-hover:bg-white/[0.05] text-architectural-muted group-hover:text-white text-xs transition-all duration-300 flex items-center gap-1.5">
+                      <div className="px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/10 group-hover:border-gold/40 group-hover:bg-white/[0.05] text-architectural-muted group-hover:text-white text-xs transition-all duration-300 flex items-center gap-1">
                         <span>Modeli Seç</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </div>
@@ -340,7 +382,7 @@ export default function ResultDossier({
         {/* 4. Action CTA Bar: Save to System, WhatsApp & Restart */}
         <div className="flex flex-col items-center gap-4 pt-6 border-t border-white/10">
           
-          {/* BUTTON 1: "Sisteme Kaydet ve Dönüş Bekle" (Directly requested by user) */}
+          {/* BUTTON 1: "Sisteme Kaydet ve Dönüş Bekle" */}
           <button
             type="button"
             onClick={handleSaveToSystemClick}
@@ -352,7 +394,11 @@ export default function ResultDossier({
           >
             <ShieldCheck className="w-4 h-4 text-obsidian relative z-10" />
             <span className="relative z-10">
-              {isSavedToSystem ? '✓ Sisteme Kaydedildi (Dönüş Bekleniyor)' : 'Sisteme Kaydet ve Dönüş Bekle'}
+              {isSavedToSystem
+                ? '✓ Sisteme Kaydedildi (Dönüş Bekleniyor)'
+                : activePackage.id === 'project'
+                ? 'Proje Talebini Kaydet ve Dönüş Bekle'
+                : 'Sisteme Kaydet ve Dönüş Bekle'}
             </span>
           </button>
 
@@ -370,7 +416,11 @@ export default function ResultDossier({
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none -skew-x-12"
             />
             <Send className="w-4 h-4 relative z-10" />
-            <span className="relative z-10">{activePackage.name} Teklifini WhatsApp'tan Gönder</span>
+            <span className="relative z-10">
+              {activePackage.id === 'project'
+                ? 'Büyük Proje İçin Özel İletişime Geç (WhatsApp)'
+                : `${activePackage.name} Teklifini WhatsApp'tan Gönder`}
+            </span>
           </button>
 
           {/* Subtle Dimmed Restart Link */}

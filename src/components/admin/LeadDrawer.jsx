@@ -17,7 +17,8 @@ export default function LeadDrawer({ lead, onClose, onStatusChange }) {
         single_boutique: 'Bağımsız Danışman & Butik Şehir İçi',
         multi_agency: 'Çok Danışmanlı Ofis & Karma Portföy',
         luxury_estates: 'Lüks Segment & Seçkin Gayrimenkuller',
-        land_investment: 'Arsa & Büyük Yatırım Projeleri'
+        land_investment: 'Arsa & Büyük Yatırım Projeleri',
+        large_development: 'Büyük Ölçekli Gayrimenkul & İnşaat Projesi'
       },
       2: {
         calm_trust: 'Sakin & Güven Verici',
@@ -27,7 +28,8 @@ export default function LeadDrawer({ lead, onClose, onStatusChange }) {
       },
       3: {
         advisor_portrait: 'Samimi Danışman / Ekip Fotoğrafı (⭐ Tavsiye Edilen)',
-        iconic_landscape: 'İkonik Portföy / Mimari Bölge Manzarası'
+        iconic_landscape: 'İkonik Portföy / Mimari Bölge Manzarası',
+        project_architecture: 'Proje Mimarisi & Sinematik Lansman Çekimi'
       },
       4: {
         warm_editorial: 'Warm Editorial (Sıcak Bej & Toprak Tonları)',
@@ -38,18 +40,18 @@ export default function LeadDrawer({ lead, onClose, onStatusChange }) {
         direct_whatsapp: 'Hızlı WhatsApp Butonu',
         calendar_booking: '15 Dk. Randevu Takvimi',
         property_submission: 'Evimi Satmak İstiyorum Portföy Formu',
-        direct_call: 'Doğrudan Arama Teşviki'
+        direct_call: 'Doğrudan Arama Teşviki',
+        project_sales_office: 'Satış Ofisi Randevusu & Kat Planı İndirme'
       },
       6: {
         light_showcase: 'Temel Vitrin Paneli (Yalın)',
         dynamic_portfolio: 'Dinamik Portföy Paneli (Sınırsız İlan)',
-        multi_agent_system: 'Çoklu Danışman Altyapısı (Bağımsız Sayfalar)'
+        multi_agent_system: 'Çoklu Danışman Altyapısı (Bağımsız Sayfalar)',
+        project_inventory_panel: 'Dinamik Proje & Ünite Stok Paneli'
       },
       7: {
         tr_reviews: 'Sadece Türkçe & Google Değerlendirmeleri',
-        multilingual: 'Çoklu Dil Altyapısı (İngilizce/Rusça/Arapça)',
-        matterport_3d: '3D Matterport & Video Tur Entegrasyonu',
-        full_spectrum: 'Full Spectrum (Çoklu Dil + 3D Sanal Tur)'
+        multilingual: 'Çoklu Dil Altyapısı (İngilizce/Rusça/Arapça)'
       }
     };
 

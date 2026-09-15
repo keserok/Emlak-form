@@ -12,24 +12,28 @@ export function generateWhatsAppLink(leadData, packageResult, activePackage) {
       case 1:
         return value === 'single_boutique' ? 'Bağımsız Danışman & Butik Şehir İçi' :
                value === 'multi_agency' ? 'Çok Danışmanlı Ofis & Karma Portföy' :
-               value === 'luxury_estates' ? 'Lüks Segment & Seçkin Gayrimenkuller' : 'Arsa & Yatırım Projeleri';
+               value === 'luxury_estates' ? 'Lüks Segment & Seçkin Gayrimenkuller' :
+               value === 'large_development' ? 'Büyük Ölçekli Gayrimenkul & İnşaat Projesi' : 'Arsa & Yatırım Projeleri';
       case 2:
         if (value === 'custom_slogan' && customSlogan) return `Özel: "${customSlogan}"`;
         return value === 'calm_trust' ? 'Sakin & Güven Verici' :
                value === 'friendly_needs' ? 'İhtiyaç Odaklı & Samimi' :
                value === 'result_oriented' ? 'Net & Sonuç Odaklı' : 'Özel Slogan';
       case 3:
-        return value === 'advisor_portrait' ? 'Samimi Danışman Portresi (⭐ MediArt Tavsiyesi)' : 'İkonik Portföy / Manzara';
+        return value === 'advisor_portrait' ? 'Samimi Danışman Portresi (⭐ MediArt Tavsiyesi)' :
+               value === 'project_architecture' ? 'Proje Mimarisi & Sinematik Lansman' : 'İkonik Portföy / Manzara';
       case 4:
         return value === 'warm_editorial' ? 'Warm Editorial' :
                value === 'pure_architectural' ? 'Pure Architectural' : 'High-End Dark';
       case 5:
         return value === 'direct_whatsapp' ? 'Hızlı WhatsApp' :
                value === 'calendar_booking' ? '15 Dk. Randevu Takvimi' :
-               value === 'property_submission' ? 'Evimi Sat Formu' : 'Doğrudan Arama';
+               value === 'property_submission' ? 'Evimi Sat Formu' :
+               value === 'project_sales_office' ? 'Satış Ofisi & Kat Planı İndirme' : 'Doğrudan Arama';
       case 6:
         return value === 'light_showcase' ? 'Temel Vitrin Paneli' :
-               value === 'dynamic_portfolio' ? 'Dinamik Portföy Paneli' : 'Çoklu Danışman Altyapısı';
+               value === 'dynamic_portfolio' ? 'Dinamik Portföy Paneli' :
+               value === 'project_inventory_panel' ? 'Dinamik Proje & Ünite Stok Paneli' : 'Çoklu Danışman Altyapısı';
       case 7:
         return value === 'tr_reviews' ? 'Türkçe & Google Puanı' :
                value === 'multilingual' ? 'Çoklu Dil Altyapısı' : value;
@@ -51,7 +55,7 @@ export function generateWhatsAppLink(leadData, packageResult, activePackage) {
   const messageLines = [
     `🏛️ *MEDİART REAL ESTATE EXPERIENCE — DİJİTAL MİMARİ ANALİZ RAPORU*`,
     `━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `🏢 *Emlak Ofisi:* ${agencyName}`,
+    `🏢 *Firma / Proje:* ${agencyName}`,
     `📞 *Telefon:* ${phone}`,
     `🎯 *Seçilen Paket:* ${targetPackageName}`,
     ...(isDifferentFromRecommended ? [`⭐ *Algoritma Tavsiyesi:* ${packageResult.packageName}`] : []),

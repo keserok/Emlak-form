@@ -62,7 +62,7 @@ export default function LeadGate({ onProceed, onSecretAdminTrigger }) {
           {/* Agency Name Input */}
           <div className="space-y-2">
             <label className="block text-xs uppercase tracking-widest text-architectural-muted font-medium">
-              Emlak Ofisi / Marka Adı
+              Emlak Ofisi, İnşaat Firması veya Proje Adı
             </label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-architectural-muted/60 group-focus-within:text-gold transition-colors">
@@ -75,7 +75,7 @@ export default function LeadGate({ onProceed, onSecretAdminTrigger }) {
                   setAgencyName(e.target.value);
                   if (errorMsg) setErrorMsg('');
                 }}
-                placeholder="Örn: Akasya Gayrimenkul veya Adınız Soyadınız"
+                placeholder="Örn: Akasya Gayrimenkul, Mesa Konsept veya Firmanız"
                 className="w-full pl-11 pr-4 py-4 rounded-2xl bg-white/[0.03] border border-white/10 focus:border-gold/60 focus:bg-white/[0.06] focus:ring-1 focus:ring-gold/40 text-sm text-architectural-white placeholder-architectural-subtle/50 outline-none transition-all duration-300 shadow-inner"
                 autoFocus
               />

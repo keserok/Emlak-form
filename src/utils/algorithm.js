@@ -11,12 +11,19 @@ const has = (ans, val) => {
 };
 
 export function calculatePackage(answers) {
-  const step1 = answers[1]; // Operation: single_boutique | multi_agency | luxury_estates | land_investment
-  const step3 = answers[3]; // Hero visual: advisor_portrait | iconic_landscape
+  const step1 = answers[1]; // Operation: single_boutique | multi_agency | luxury_estates | land_investment | large_development
+  const step3 = answers[3]; // Hero visual: advisor_portrait | iconic_landscape | project_architecture
   const step4 = answers[4]; // Design style: warm_editorial | pure_architectural | high_end_dark
-  const step5 = answers[5]; // Contact: direct_whatsapp | calendar_booking | property_submission | direct_call
-  const step6 = answers[6]; // Panel: light_showcase | dynamic_portfolio | multi_agent_system
-  const step7 = answers[7]; // Modules: tr_reviews | multilingual | matterport_3d | full_spectrum
+  const step5 = answers[5]; // Contact: direct_whatsapp | calendar_booking | property_submission | direct_call | project_sales_office
+  const step6 = answers[6]; // Panel: light_showcase | dynamic_portfolio | multi_agent_system | project_inventory_panel
+  const step7 = answers[7]; // Modules: tr_reviews | multilingual
+
+  // Check for Büyük Proje triggers
+  const isProject =
+    has(step1, 'large_development') ||
+    has(step6, 'project_inventory_panel') ||
+    has(step5, 'project_sales_office') ||
+    has(step3, 'project_architecture');
 
   // Check for Premium triggers
   const isPremium =
@@ -39,7 +46,13 @@ export function calculatePackage(answers) {
   let deliveryDays = '5 - 7 İş Günü';
   let priceEstimate = 'Özel Teklif';
 
-  if (isPremium) {
+  if (isProject) {
+    packageTier = 'project';
+    packageName = 'Büyük Gayrimenkul Projeleri';
+    badgeName = 'INTERACTIVE & DYNAMIC SPEC';
+    deliveryDays = 'Proje Kapsamına Göre';
+    priceEstimate = 'Özel Mimari Teklif';
+  } else if (isPremium) {
     packageTier = 'premium';
     packageName = 'Premium Paket';
     badgeName = 'HIGH-END LUXURY SPEC';
@@ -58,7 +71,9 @@ export function calculatePackage(answers) {
 
   // Generate 2-sentence bespoke rationale based on multi-selections
   let rationale = '';
-  if (packageTier === 'premium') {
+  if (packageTier === 'project') {
+    rationale = `Geliştirdiğiniz büyük ölçekli gayrimenkul veya inşaat projesinin prestijini yansıtan, statik sayfalardan arındırılmış interaktif kat planı deneyimi ve dinamik ünite stok altyapısına sahip özel bir lansman mimarisi kurgulandı. Projenizin büyüklüğü ve mimari dinamiklerine göre en doğru dijital satış operasyonu için sizinle özel iletişime geçmemiz gerekmektedir.`;
+  } else if (packageTier === 'premium') {
     rationale = `Seçtiğiniz ${
       has(step1, 'luxury_estates') ? 'lüks segment portföy dinamikleri' : 'yüksek standartlı mimari estetik'
     } ve ${
@@ -82,6 +97,16 @@ export function calculatePackage(answers) {
   const features = [];
 
   // Hero visual features
+  if (has(step3, 'project_architecture') || has(step1, 'large_development')) {
+    features.push({
+      title: 'İnteraktif Kat & Daire Planı Seçicisi',
+      desc: 'Ziyaretçilerin kat ve daire planlarını interaktif olarak incelediği dinamik mimari altyapı.'
+    });
+    features.push({
+      title: 'Dinamik Ünite Stok & Satış Paneli',
+      desc: 'Blok, kat ve daire bazında satıldı/satılık durumlarının anlık yönetildiği proje altyapısı.'
+    });
+  }
   if (has(step3, 'advisor_portrait')) {
     features.push({
       title: 'Stüdyo Kalitesinde Danışman Güven Çapası',

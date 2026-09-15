@@ -56,5 +56,25 @@ export const ALL_PACKAGES = [
       'Awwwards Düzeyinde Monokrom Obsidyen & Altın Lüks Aura',
       'Öncelikli 7/24 VIP Destek & 1 Yıl Süreyle Mimari Garanti'
     ]
+  },
+  {
+    id: 'project',
+    name: 'Büyük Gayrimenkul Projeleri',
+    badge: 'INTERACTIVE & DYNAMIC SPEC',
+    target: 'İnşaat Firmaları & Markalı Konut Projeleri',
+    deliveryDays: 'Proje Kapsamına Göre',
+    summary: 'Büyük ölçekli konut veya karma projeler için interaktif kat planı deneyimi, dinamik ünite stok altyapısı ve sinematik lansman mimarisi.',
+    accentColor: 'from-amber-500/20 to-orange-500/10',
+    borderColor: 'border-amber-500/40',
+    interactiveBadge: 'İnteraktif & Dinamik Altyapı',
+    isCustomContact: true,
+    contactNotice: 'Büyük ölçekli projeler için özel iletişime geçmemiz gerekmektedir.',
+    itemsPrefix: null,
+    items: [
+      'İnteraktif Kat & Daire Planı Seçicisi',
+      'Dinamik Ünite Stok & Satış Durumu Yönetimi',
+      'Sinematik Lansman Aurası & Dijital Proje Kataloğu',
+      'Çok Dilli Küresel Yatırımcı & Satış Ofisi Köprüsü'
+    ]
   }
 ];

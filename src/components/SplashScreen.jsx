@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Award } from 'lucide-react';
 
 export default function SplashScreen({ onStart, onOpenAdmin, onOpenSelinSite }) {
-  const headlineWords = ["Emlakçılara", "özel", "siteler."];
+  const headlineWords = ["Emlak ve gayrimenkul", "şirketleri için", "siteler."];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,7 +98,7 @@ export default function SplashScreen({ onStart, onOpenAdmin, onOpenSelinSite }) 
           transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-base sm:text-lg md:text-xl text-architectural-muted max-w-2xl font-light leading-relaxed mb-12"
         >
-          Klişelerden uzak, danışmanın kişisel güvenini ve portföyün değerini öne çıkaran editoryal dijital deneyimler.
+          Klişelerden uzak; danışmanların, gayrimenkul şirketlerinin ve büyük inşaat projelerinin değerini öne çıkaran editoryal dijital deneyimler.
           <span className="block mt-2 font-serif italic text-architectural-white/90 text-sm tracking-wide">
             MediArt Craftsmanship.
           </span>
