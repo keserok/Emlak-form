@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Award } from 'lucide-react';
 
-export default function SplashScreen({ onStart, onOpenAdmin, onOpenSelinSite }) {
+export default function SplashScreen({ onStart, onOpenAdmin, onOpenPackages }) {
   const headlineWords = ["Emlak ve gayrimenkul", "şirketleri için", "siteler."];
 
   const containerVariants = {
@@ -128,8 +128,8 @@ export default function SplashScreen({ onStart, onOpenAdmin, onOpenSelinSite }) 
           </div>
         </motion.button>
 
-        {/* Direct Link to Selin Karaca Site */}
-        {onOpenSelinSite && (
+        {/* Direct Link to Packages & Live Models */}
+        {onOpenPackages && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -141,12 +141,12 @@ export default function SplashScreen({ onStart, onOpenAdmin, onOpenSelinSite }) 
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onOpenSelinSite();
+                onOpenPackages();
               }}
-              className="inline-flex items-center gap-2.5 text-xs font-mono tracking-wider text-gold-light hover:text-white transition-all py-2.5 px-6 rounded-full border border-gold/30 hover:border-gold bg-gold/10 hover:bg-gold/20 shadow-[0_0_20px_rgba(212,175,55,0.15)] cursor-pointer active:scale-95"
+              className="group inline-flex items-center gap-2.5 text-xs font-mono tracking-wider text-architectural-muted hover:text-gold-light transition-all py-2.5 px-6 rounded-full border border-white/10 hover:border-gold/40 bg-white/[0.03] hover:bg-gold/[0.08] backdrop-blur-md cursor-pointer active:scale-95 shadow-sm"
             >
-              <span>🏛️ Canlı Örnek: Selin Karaca VIP Sitesini Gör</span>
-              <ArrowRight className="w-3.5 h-3.5 text-gold" />
+              <span>Paketleri ve Canlı Örnekleri Doğrudan İncele</span>
+              <ArrowRight className="w-3.5 h-3.5 text-gold/70 group-hover:text-gold group-hover:translate-x-0.5 transition-transform" />
             </button>
           </motion.div>
         )}

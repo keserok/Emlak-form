@@ -25,6 +25,9 @@ export default function App() {
       if (urlParams.get('site') === 'standard' || window.location.hash === '#standard') {
         return 'standard_site';
       }
+      if (urlParams.get('view') === 'packages' || window.location.hash === '#packages' || window.location.hash === '#paketler') {
+        return 'result';
+      }
     }
     return 'splash';
   });
@@ -37,25 +40,50 @@ export default function App() {
   const [customSlogan, setCustomSlogan] = useState('');
 
   // Result Dossier State
-  const [packageResult, setPackageResult] = useState(null);
+  const [packageResult, setPackageResult] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('view') === 'packages' || window.location.hash === '#packages' || window.location.hash === '#paketler') {
+        return {
+          packageName: 'Standart Paket',
+          packageTier: 'standard',
+          deliveryDays: '5 - 7 İş Günü',
+          rationale: 'Tüm dijital gayrimenkul mimarilerimizi, canlı çalışan danışman web sitelerini ve yönetim panellerini aşağıdan doğrudan inceleyebilirsiniz.',
+          features: []
+        };
+      }
+    }
+    return null;
+  });
 
   // Admin Leads State - lazy initialized from localStorage
   const [leads, setLeads] = useState(() => getStoredLeads());
 
-  // Listen to hash changes (#selin, #standard or back)
+  // Listen to hash changes (#selin, #standard, #packages or back)
   React.useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === '#selin') {
         setCurrentView('selin_site');
       } else if (window.location.hash === '#standard') {
         setCurrentView('standard_site');
-      } else if (!window.location.hash && (currentView === 'selin_site' || currentView === 'standard_site')) {
+      } else if (window.location.hash === '#packages' || window.location.hash === '#paketler') {
+        if (!packageResult) {
+          setPackageResult({
+            packageName: 'Standart Paket',
+            packageTier: 'standard',
+            deliveryDays: '5 - 7 İş Günü',
+            rationale: 'Tüm dijital gayrimenkul mimarilerimizi, canlı çalışan danışman web sitelerini ve yönetim panellerini aşağıdan doğrudan inceleyebilirsiniz.',
+            features: []
+          });
+        }
+        setCurrentView('result');
+      } else if (!window.location.hash && (currentView === 'selin_site' || currentView === 'standard_site' || currentView === 'result')) {
         setCurrentView('splash');
       }
     };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [currentView]);
+  }, [currentView, packageResult]);
 
   // Update lead status in admin
   const handleUpdateStatus = (leadId, newStatus) => {
@@ -224,9 +252,18 @@ export default function App() {
               <SplashScreen
                 onStart={handleStartExperience}
                 onOpenAdmin={() => setCurrentView('admin')}
-                onOpenSelinSite={() => {
-                  window.location.hash = 'selin';
-                  setCurrentView('selin_site');
+                onOpenPackages={() => {
+                  if (!packageResult) {
+                    setPackageResult({
+                      packageName: 'Standart Paket',
+                      packageTier: 'standard',
+                      deliveryDays: '5 - 7 İş Günü',
+                      rationale: 'Tüm dijital gayrimenkul mimarilerimizi, canlı çalışan danışman web sitelerini ve yönetim panellerini aşağıdan doğrudan inceleyebilirsiniz.',
+                      features: []
+                    });
+                  }
+                  window.location.hash = 'packages';
+                  setCurrentView('result');
                   window.scrollTo({ top: 0, behavior: 'instant' });
                 }}
               />
