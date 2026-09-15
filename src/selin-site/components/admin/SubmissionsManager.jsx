@@ -302,6 +302,14 @@ ${agentProfile?.phone || ''}`;
                       </div>
                     </div>
 
+                    {/* Selected Recommendation if available */}
+                    {sub.selectedRecommendation && (
+                      <div className="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-center gap-2">
+                        <Compass className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                        <span>Talebe Bağlanan VIP Portföy: <strong>{sub.selectedRecommendation}</strong></span>
+                      </div>
+                    )}
+
                     {/* Customer Notes */}
                     {sub.notes && (
                       <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#E8E2D9] text-xs text-slate-700">

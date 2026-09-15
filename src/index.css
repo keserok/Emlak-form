@@ -16,6 +16,36 @@
     padding: 0;
     overflow-x: hidden;
   }
+
+  /* Scoped light theme rules: ensures inputs NEVER have dark backgrounds in standard or selin sites */
+  .standard-theme-root,
+  .selin-site-root,
+  .light-form-scope {
+    color-scheme: light !important;
+  }
+
+  .standard-theme-root input:not([type="checkbox"]):not([type="radio"]),
+  .standard-theme-root select,
+  .standard-theme-root textarea,
+  .selin-site-root input:not([type="checkbox"]):not([type="radio"]),
+  .selin-site-root select,
+  .selin-site-root textarea,
+  .light-form-scope input:not([type="checkbox"]):not([type="radio"]),
+  .light-form-scope select,
+  .light-form-scope textarea {
+    color-scheme: light !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .standard-theme-root input::placeholder,
+  .standard-theme-root textarea::placeholder,
+  .selin-site-root input::placeholder,
+  .selin-site-root textarea::placeholder,
+  .light-form-scope input::placeholder,
+  .light-form-scope textarea::placeholder {
+    color: #94a3b8 !important;
+  }
 }
 
 /* Custom Editorial Scrollbar */
