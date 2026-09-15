@@ -28,7 +28,7 @@ export default function PackageDemoModal({
   const tierMeta = {
     standard: {
       name: 'Standart Paket',
-      subtitle: 'Deniz Arslan • Ege & Akdeniz Butik Gayrimenkul'
+      subtitle: 'Deniz Arslan • Butik Gayrimenkul'
     },
     advanced: {
       name: 'Üst Düzey Paket',

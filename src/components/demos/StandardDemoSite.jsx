@@ -264,11 +264,17 @@ export default function StandardDemoSite({ onReturn }) {
               <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div>
-                    <span className="font-serif font-bold text-sm tracking-wider text-[#2C3E35] block">
-                      {agentProfile.name?.toUpperCase() || 'DENİZ ARSLAN'}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#7C6A59] font-medium block">
-                      {agentProfile.title || 'Ege & Akdeniz Butik Gayrimenkul'}
+                    <div className="flex items-center gap-2">
+                      <span className="font-serif font-bold text-sm tracking-wider text-[#2C3E35]">
+                        {agentProfile.name?.toUpperCase() || 'DENİZ ARSLAN'}
+                      </span>
+                      <span className="text-slate-300 font-light">|</span>
+                      <span className="text-xs font-serif font-semibold text-[#7C6A59] tracking-wide">
+                        {agentProfile.companyName || 'Butik Gayrimenkul'}
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-widest text-[#7C6A59] font-medium block mt-0.5">
+                      {agentProfile.region || 'Urla • Çeşme • Alaçatı • Bodrum'}
                     </span>
                   </div>
                 </div>
@@ -304,9 +310,8 @@ export default function StandardDemoSite({ onReturn }) {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <div className="md:col-span-7 space-y-5">
-                  <div className="inline-flex items-center gap-2 text-[#7C6A59] text-[11px] font-semibold tracking-wider uppercase">
-                    <Compass className="w-3.5 h-3.5 text-[#7C6A59]" />
-                    <span>{agentProfile.badge || 'Butik Danışmanlık • Maksimum 15 Seçkin Portföy'}</span>
+                  <div className="font-serif italic text-xs sm:text-sm tracking-[0.16em] text-[#7C6A59] font-normal">
+                    {agentProfile.badge || 'Butik Danışmanlık • Maksimum 15 Seçkin Portföy'}
                   </div>
 
                   <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1E2522] leading-[1.15] font-medium tracking-tight">
@@ -391,7 +396,10 @@ export default function StandardDemoSite({ onReturn }) {
                         </span>
                         <ShieldCheck className="w-4 h-4 text-emerald-600" />
                       </div>
-                      <div className="text-[11px] text-[#7C6A59] font-medium mt-0.5">
+                      <div className="text-[11px] font-serif font-semibold text-[#2C3E35] mt-0.5">
+                        {agentProfile.companyName || 'Butik Gayrimenkul'}
+                      </div>
+                      <div className="text-[10px] text-[#7C6A59] font-medium mt-0.5">
                         {agentProfile.region || 'Urla • Çeşme • Alaçatı • Bodrum'}
                       </div>
                     </div>
@@ -799,11 +807,6 @@ export default function StandardDemoSite({ onReturn }) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                     <div className="lg:col-span-8 space-y-4">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-300 text-[11px] font-semibold tracking-widest uppercase border border-white/10">
-                        <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
-                        <span>Kişisel Değerleme & Portföy Başvurusu</span>
-                      </div>
-
                       <h2 className="font-serif text-2xl sm:text-4xl text-white font-medium leading-tight">
                         Mülkünüzü Doğru Değerinde Sakin Alıcı Ağına Sunun
                       </h2>
@@ -854,13 +857,13 @@ export default function StandardDemoSite({ onReturn }) {
             <footer className="py-12 bg-[#FAF8F5] text-center border-t border-[#E8E4DC] text-xs text-slate-500">
               <div className="max-w-6xl mx-auto px-4 space-y-2">
                 <div className="font-serif font-bold text-sm text-[#2C3E35]">
-                  {agentProfile.name || 'Deniz Arslan'} • Butik Gayrimenkul Danışmanlığı
+                  {agentProfile.name || 'Deniz Arslan'} • {agentProfile.companyName || 'Butik Gayrimenkul'}
                 </div>
                 <div className="text-[11px] text-slate-400">
                   {agentProfile.officeAddress || 'Keklicek Mevkii No: 18, Urla / İzmir'} • {agentProfile.phone || '+90 532 411 20 26'}
                 </div>
                 <div className="text-[10px] text-slate-400 pt-2 border-t border-[#E8E4DC]/60">
-                  © 2026 Deniz Arslan Butik Gayrimenkul • Standart Paket Editoryal Tasarım Mimarisi
+                  © 2026 {agentProfile.companyName || 'Butik Gayrimenkul'} ({agentProfile.name || 'Deniz Arslan'}) • Standart Paket Editoryal Tasarım Mimarisi
                 </div>
               </div>
             </footer>

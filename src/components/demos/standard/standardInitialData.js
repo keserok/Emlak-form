@@ -1,14 +1,15 @@
 export const initialStandardProfile = {
   name: "Deniz Arslan",
-  title: "Ege & Akdeniz Butik Gayrimenkul Danışmanı",
+  companyName: "Butik Gayrimenkul",
+  title: "Butik Gayrimenkul",
   region: "Urla • Çeşme • Alaçatı • Bodrum",
   phone: "+90 532 411 20 26",
-  email: "deniz@denizarslanrealty.com",
+  email: "deniz@butikgayrimenkul.com",
   officeAddress: "Keklicek Mevkii No: 18, Urla / İzmir",
   avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
   badge: "Butik Danışmanlık • Maksimum 15 Seçkin Portföy",
   headline: "Karakterli Evler, Sakin Yaşamlar.",
-  subheadline: "Yüzlerce ilanın arasında kaybolmayın. Ege ve Akdeniz'in huzurlu lokasyonlarında, mimarisi ve tapusu doğrulanmış seçkin mülklerle yalnızca size özel çalışıyorum.",
+  subheadline: "Yüzlerce ilanın arasında kaybolmayın. Ege ve Akdeniz'in huzurlu lokasyonlarında, mimarisi ve tapusu doğrulanmış seçkin mülklerle Butik Gayrimenkul güvencesiyle yalnızca size özel çalışıyorum.",
   googleReviews: {
     score: "4.9",
     totalReviews: 148,

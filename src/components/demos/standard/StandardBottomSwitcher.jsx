@@ -26,6 +26,8 @@ export default function StandardBottomSwitcher({
           </div>
           <div className="flex items-center gap-2">
             <span className="font-semibold text-xs text-white">Deniz Arslan</span>
+            <span className="text-slate-400 font-light">•</span>
+            <span className="text-xs text-amber-200/90 font-medium">Butik Gayrimenkul</span>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-mono">
               Standart Paket
             </span>

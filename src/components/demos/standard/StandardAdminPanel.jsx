@@ -131,7 +131,7 @@ export default function StandardAdminPanel({
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Hoş geldiniz, {agentProfile.name} • Ege & Akdeniz Butik Portföy Yönetimi
+                Hoş geldiniz, {agentProfile.name} • Butik Gayrimenkul Portföy Yönetimi
               </p>
             </div>
           </div>
@@ -308,7 +308,7 @@ export default function StandardAdminPanel({
                   {/* Actions */}
                   <div className="flex items-center gap-2 shrink-0">
                     <a
-                      href={`https://wa.me/${sub.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Merhaba ${sub.fullName}, Deniz Arslan Butik Gayrimenkul'e ilettiğiniz ${sub.refCode} referans kodlu talebiniz için iletişime geçiyorum.`)}`}
+                      href={`https://wa.me/${sub.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Merhaba ${sub.fullName}, Butik Gayrimenkul'e (${agentProfile.name || 'Deniz Arslan'}) ilettiğiniz ${sub.refCode} referans kodlu talebiniz için iletişime geçiyorum.`)}`}
                       target="_blank"
                       rel="noreferrer"
                       className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs"

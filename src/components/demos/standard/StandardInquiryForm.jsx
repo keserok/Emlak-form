@@ -269,7 +269,7 @@ export default function StandardInquiryForm({ onBackToShowcase, onAddSubmission,
                 Talebiniz Başarıyla Oluşturuldu!
               </h2>
               <p className="text-xs text-slate-600 max-w-md mx-auto">
-                Talebiniz Deniz Arslan'ın kontrol paneline aktarıldı. Referans kodunuzla talebinizi teyit etmek için WhatsApp üzerinden de hemen mesaj iletebilirsiniz.
+                Talebiniz Butik Gayrimenkul ({agentProfile?.name || 'Deniz Arslan'}) kontrol merkezine aktarıldı. Referans kodunuzla talebinizi teyit etmek için WhatsApp üzerinden de hemen mesaj iletebilirsiniz.
               </p>
             </div>
 
@@ -747,7 +747,7 @@ export default function StandardInquiryForm({ onBackToShowcase, onAddSubmission,
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2.5 text-xs text-slate-500">
               <ShieldCheck className="w-4 h-4 text-[#2C3E35] shrink-0" />
               <span>
-                <strong>Gizlilik Güvencesi:</strong> İlettiğiniz bilgiler yalnızca Deniz Arslan tarafından incelenir, üçüncü taraflarla paylaşılmaz.
+                <strong>Gizlilik Güvencesi:</strong> İlettiğiniz bilgiler yalnızca Butik Gayrimenkul ({agentProfile?.name || 'Deniz Arslan'}) tarafından incelenir, üçüncü taraflarla paylaşılmaz.
               </span>
             </div>
 
