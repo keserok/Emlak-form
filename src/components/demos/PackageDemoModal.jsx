@@ -179,8 +179,8 @@ export default function PackageDemoModal({
         
         {viewportMode === 'desktop' && (
           <div className="w-full max-w-7xl bg-white shadow-2xl rounded-2xl overflow-hidden border border-white/10">
-            {activeTier === 'standard' && <StandardDemoSite />}
-            {activeTier === 'advanced' && <AdvancedDemoSite />}
+            {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
+            {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
             {activeTier === 'premium' && <PremiumDemoSite />}
           </div>
         )}
@@ -191,8 +191,8 @@ export default function PackageDemoModal({
               <div className="w-12 h-1 bg-slate-600 rounded-full" />
             </div>
             <div className="max-h-[85vh] overflow-y-auto">
-              {activeTier === 'standard' && <StandardDemoSite />}
-              {activeTier === 'advanced' && <AdvancedDemoSite />}
+              {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
+              {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
               {activeTier === 'premium' && <PremiumDemoSite />}
             </div>
           </div>
@@ -207,8 +207,8 @@ export default function PackageDemoModal({
               </div>
             </div>
             <div className="max-h-[80vh] overflow-y-auto">
-              {activeTier === 'standard' && <StandardDemoSite />}
-              {activeTier === 'advanced' && <AdvancedDemoSite />}
+              {activeTier === 'standard' && <StandardDemoSite onReturn={onClose} />}
+              {activeTier === 'advanced' && <AdvancedDemoSite onReturn={onClose} />}
               {activeTier === 'premium' && <PremiumDemoSite />}
             </div>
           </div>

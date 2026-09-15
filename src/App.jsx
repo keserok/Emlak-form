@@ -9,18 +9,22 @@ import ResultDossier from './components/ResultDossier';
 import VaultUnlockFx from './components/VaultUnlockFx';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AdvancedDemoSite from './components/demos/AdvancedDemoSite';
+import StandardDemoSite from './components/demos/StandardDemoSite';
 import SelinKaracaEmbed from './selin-site/SelinKaracaEmbed';
 import { STEPS_DATA } from './data/stepsData';
 import { calculatePackage } from './utils/algorithm';
 import { getStoredLeads, saveLead, updateLeadStatus, updateLeadPackageAndStatus } from './utils/storage';
 
 export default function App() {
-  // Current view: 'splash' | 'gate' | 'step' | 'vault_unlock' | 'result' | 'admin' | 'selin_site'
+  // Current view: 'splash' | 'gate' | 'step' | 'vault_unlock' | 'result' | 'admin' | 'selin_site' | 'standard_site'
   const [currentView, setCurrentView] = useState(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('site') === 'selin' || window.location.hash === '#selin') {
         return 'selin_site';
+      }
+      if (urlParams.get('site') === 'standard' || window.location.hash === '#standard') {
+        return 'standard_site';
       }
     }
     return 'splash';
@@ -39,12 +43,14 @@ export default function App() {
   // Admin Leads State - lazy initialized from localStorage
   const [leads, setLeads] = useState(() => getStoredLeads());
 
-  // Listen to hash changes (#selin or back)
+  // Listen to hash changes (#selin, #standard or back)
   React.useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === '#selin') {
         setCurrentView('selin_site');
-      } else if (!window.location.hash && currentView === 'selin_site') {
+      } else if (window.location.hash === '#standard') {
+        setCurrentView('standard_site');
+      } else if (!window.location.hash && (currentView === 'selin_site' || currentView === 'standard_site')) {
         setCurrentView('splash');
       }
     };
@@ -169,6 +175,19 @@ export default function App() {
   if (currentView === 'selin_site') {
     return (
       <SelinKaracaEmbed
+        onReturn={() => {
+          window.location.hash = '';
+          setCurrentView('splash');
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }}
+      />
+    );
+  }
+
+  // Render Deniz Arslan Standard boutique platform directly (full screen)
+  if (currentView === 'standard_site') {
+    return (
+      <StandardDemoSite
         onReturn={() => {
           window.location.hash = '';
           setCurrentView('splash');
