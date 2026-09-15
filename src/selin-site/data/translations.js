@@ -12,6 +12,7 @@ export const TRANSLATIONS = {
       contact: 'İletişim',
       valuation: 'Mülkünü Değerle / Sat',
       inquiry: 'Talep Formu',
+      regionGuide: 'Bölge Rehberi',
       callPrefix: 'Hemen Arayın',
       langHeading: 'DİL SEÇİMİ',
       currencyHeading: 'PARA BİRİMİ',
@@ -117,10 +118,14 @@ export const TRANSLATIONS = {
       tabAll: 'Tümü',
       tabVilla: 'Müstakil Villa',
       tabPenthouse: 'Penthouse & Konak',
-      tabVault: '🔒 Gizli Kasa (Off-Market)',
+      tabVault: 'Gizli Kasa (Off-Market)',
       inspect: 'İncele',
       call: 'Hemen Ara',
       sold: 'SATILDI',
+      saveToFavorites: 'Favorilere Ekle',
+      saved: 'Kaydedildi',
+      photoCount: (curr, total) => `${curr}/${total} Fotoğraf`,
+      viewDetails: 'Detaylı İncele',
       vaultTitle: 'Selin Karaca Off-Market Portföy Kasası',
       vaultDesc: 'Göktürk ve Boğaz hattında gizlilik sözleşmesi (NDA) ile korunan seçkin malikane ve yalı koleksiyonu. Erişim yalnızca teyitli VIP alıcılara açıktır.',
       vaultPlaceholder: 'VIP Erişim Kodu (Örn: VIP2026)',
@@ -140,10 +145,53 @@ export const TRANSLATIONS = {
       area: 'Alan',
       overview: 'Mülk Özeti',
       features: 'Donanımlar',
+      specsTitle: 'Mimari & Yapısal Detaylar',
+      specCeiling: 'Tavan Yüksekliği',
+      specHeating: 'Isıtma Sistemi',
+      specParking: 'Özel Otopark',
+      specOrientation: 'Cephe & Manzara',
+      specYear: 'Yapım Yılı',
+      specDues: 'Tahmini Aidat',
+      photoGallery: 'Fotoğraf Galerisi',
       callAction: 'Telefonla Bilgi Al',
       dossierAction: 'Yatırımcı Dosyası İste',
       close: 'Kapat',
       waMessage: (title) => `Merhaba Selin Hanım, "${title}" mülkünüz hakkında detaylı bilgi ve yatırımcı dosyasını almak istiyorum.`
+    },
+    neighborhood: {
+      badge: 'Bölge & Yaşam Rehberi',
+      title: 'Göktürk & Kemerburgaz’da Yaşam Ayrıcalığı',
+      subtitle: 'Sadece bir mülk değil; doğa, prestijli sosyal kulüpler, seçkin okullar ve havalimanına kesintisiz erişimle tanımlanan benzersiz bir yaşam tarzı.',
+      pillars: [
+        {
+          id: 'kemer',
+          tag: 'SPOR & SOSYAL KULÜP',
+          title: 'Kemer Country Club & Golf',
+          subtitle: 'Binicilik, 18 Delikli Golf & Tenis',
+          desc: 'Türkiye’nin en seçkin sosyal kulüplerinden birine yalnızca birkaç dakika mesafede, golf sahaları ve atlı spor kulübüyle zenginleşen bir çevre.'
+        },
+        {
+          id: 'forest',
+          tag: 'DOĞA & HİJYEN',
+          title: 'Belgrad Ormanı Eteklerinde',
+          subtitle: 'Doğal Oksijen & Yürüyüş Parkurları',
+          desc: 'Şehrin stresinden ve gürültüsünden izole, asırlık orman dokusunun hemen kıyısında koruma altındaki yeşil hat ile huzurlu yaşam.'
+        },
+        {
+          id: 'airport',
+          tag: 'ULAŞIM & LOJİSTİK',
+          title: 'İstanbul Havalimanı 15 Dk',
+          subtitle: 'Küresel Ulaşılabilirlik & VIP Konfor',
+          desc: 'Sık seyahat eden iş insanları ve uluslararası aileler için trafiksiz, konforlu ve doğrudan otoban bağlantısı ayrıcalığı.'
+        },
+        {
+          id: 'education',
+          tag: 'AKADEMİK GELECEK',
+          title: 'Seçkin Eğitim Kurumları',
+          subtitle: 'Hisar Okulları & Kolejler Hattı',
+          desc: 'Çocuklarınız için Türkiye’nin en yüksek akademik standartlarına sahip okullarına yürüme ve servis kolaylığı sağlayan aile odaklı lokasyon.'
+        }
+      ]
     },
     contact: {
       badge: 'Doğrudan İletişim',
@@ -219,6 +267,7 @@ export const TRANSLATIONS = {
       contact: 'Contact',
       valuation: 'Valuation & Sell',
       inquiry: 'Inquiry Form',
+      regionGuide: 'Area Guide',
       callPrefix: 'Call Direct',
       langHeading: 'LANGUAGE SELECTION',
       currencyHeading: 'CURRENCY',
@@ -324,10 +373,14 @@ export const TRANSLATIONS = {
       tabAll: 'All',
       tabVilla: 'Private Villa',
       tabPenthouse: 'Penthouse & Mansion',
-      tabVault: '🔒 Private Vault (Off-Market)',
+      tabVault: 'Private Vault (Off-Market)',
       inspect: 'Inspect',
       call: 'Call Direct',
       sold: 'SOLD',
+      saveToFavorites: 'Save to Favorites',
+      saved: 'Saved',
+      photoCount: (curr, total) => `${curr}/${total} Photos`,
+      viewDetails: 'View Details',
       vaultTitle: 'Selin Karaca Off-Market Portfolio Vault',
       vaultDesc: 'A discreet selection of prestigious estates and waterfront mansions protected by non-disclosure agreements (NDA). Access is strictly reserved for verified VIP clients.',
       vaultPlaceholder: 'VIP Access Code (e.g. VIP2026)',
@@ -347,10 +400,53 @@ export const TRANSLATIONS = {
       area: 'Area',
       overview: 'Property Overview',
       features: 'Amenities & Highlights',
+      specsTitle: 'Architectural & Building Specs',
+      specCeiling: 'Ceiling Height',
+      specHeating: 'Heating System',
+      specParking: 'Private Parking',
+      specOrientation: 'Orientation & View',
+      specYear: 'Year Built',
+      specDues: 'Estimated Dues',
+      photoGallery: 'Photo Gallery',
       callAction: 'Call for Inquiries',
       dossierAction: 'Request Investor Dossier',
       close: 'Close',
       waMessage: (title) => `Hello Ms. Selin Karaca, I would like to receive detailed information and the investor dossier for "${title}".`
+    },
+    neighborhood: {
+      badge: 'Area & Lifestyle Guide',
+      title: 'Living Excellence in Göktürk & Kemerburgaz',
+      subtitle: 'More than a residence: a bespoke lifestyle defined by lush nature, prestigious country clubs, premier schools, and seamless airport connectivity.',
+      pillars: [
+        {
+          id: 'kemer',
+          tag: 'SPORTS & PRIVATE CLUB',
+          title: 'Kemer Country Club & Golf',
+          subtitle: 'Equestrian Center, 18-Hole Golf & Tennis',
+          desc: 'Minutes away from Turkey’s premier country club estate, featuring championship golf grounds, riding arenas, and an elite social atmosphere.'
+        },
+        {
+          id: 'forest',
+          tag: 'NATURE & SERENITY',
+          title: 'Edge of Belgrad Forest',
+          subtitle: 'Pure Oxygen & Scenic Trailheads',
+          desc: 'A tranquil sanctuary protected from urban congestion, sheltered alongside centuries-old protected oak canopies and walking routes.'
+        },
+        {
+          id: 'airport',
+          tag: 'TRANSIT & CONNECTIVITY',
+          title: '15 Mins to Istanbul Airport',
+          subtitle: 'Global Gateway & Executive Transit',
+          desc: 'Effortless non-stop freeway access for frequent flyers, diplomats, and international executives needing immediate international flights.'
+        },
+        {
+          id: 'education',
+          tag: 'ACADEMIC EXCELLENCE',
+          title: 'Premier International Academies',
+          subtitle: 'Hisar School & Academic Corridor',
+          desc: 'Direct proximity to Turkey’s most renowned bilingual academies and private schools, offering world-class curricula at your doorstep.'
+        }
+      ]
     },
     contact: {
       badge: 'Direct Advisory Contact',
@@ -426,6 +522,7 @@ export const TRANSLATIONS = {
       contact: 'Контакты',
       valuation: 'Оценка / Продажа',
       inquiry: 'Форма запроса',
+      regionGuide: 'Гид по району',
       callPrefix: 'Позвонить',
       langHeading: 'ВЫБОР ЯЗЫКА',
       currencyHeading: 'ВАЛЮТА',
@@ -531,10 +628,14 @@ export const TRANSLATIONS = {
       tabAll: 'Все',
       tabVilla: 'Виллы',
       tabPenthouse: 'Пентхаусы и особняки',
-      tabVault: '🔒 Закрытая база (Off-Market)',
+      tabVault: 'Закрытая база (Off-Market)',
       inspect: 'Подробнее',
       call: 'Позвонить',
       sold: 'ПРОДАНО',
+      saveToFavorites: 'В избранное',
+      saved: 'Сохранено',
+      photoCount: (curr, total) => `${curr}/${total} Фото`,
+      viewDetails: 'Подробнее',
       vaultTitle: 'Закрытая база Selin Karaca Off-Market',
       vaultDesc: 'Коллекция элитных особняков и исторических ялы в Гёктюрке и на Босфоре под защитой соглашения о неразглашении (NDA). Доступ только для верифицированных VIP-покупателей.',
       vaultPlaceholder: 'VIP-код доступа (напр. VIP2026)',
@@ -554,10 +655,53 @@ export const TRANSLATIONS = {
       area: 'Площадь',
       overview: 'Описание объекта',
       features: 'Особенности и удобства',
+      specsTitle: 'Архитектурные характеристики',
+      specCeiling: 'Высота потолков',
+      specHeating: 'Система отопления',
+      specParking: 'Паркинг',
+      specOrientation: 'Ориентация / Вид',
+      specYear: 'Год постройки',
+      specDues: 'Коммунальные платежи',
+      photoGallery: 'Фотогалерея',
       callAction: 'Позвонить для консультации',
       dossierAction: 'Запросить досье инвестора',
       close: 'Закрыть',
       waMessage: (title) => `Здравствуйте, госпожа Селин Караджа! Я хотел(а) бы получить подробную информацию и инвестиционное досье по объекту "${title}".`
+    },
+    neighborhood: {
+      badge: 'Гид по району и стилю жизни',
+      title: 'Привилегия жизни в Гёктюрке и Кемербургазе',
+      subtitle: 'Не просто элитная недвижимость, а уникальный образ жизни: реликтовая природа, закрытые гольф-клубы, ведущие международные школы и быстрый доступ к аэропорту.',
+      pillars: [
+        {
+          id: 'kemer',
+          tag: 'СПОРТ И ЗАКРЫТЫЙ КЛУБ',
+          title: 'Kemer Country Club & Golf',
+          subtitle: 'Конный спорт, 18-луночный гольф и теннис',
+          desc: 'Всего в нескольких минутах от главного загородного клуба Турции с профессиональными полями для гольфа, манежами и закрытым светским кругом.'
+        },
+        {
+          id: 'forest',
+          tag: 'ПРИРОДА И ЭКОЛОГИЯ',
+          title: 'У подножия Белградского леса',
+          subtitle: 'Чистейший воздух и прогулочные маршруты',
+          desc: 'Уединенное и безопасное окружение вдали от шума мегаполиса, прямо на границе охраняемой многовековой лесной зоны.'
+        },
+        {
+          id: 'airport',
+          tag: 'ТРАНСПОРТ И ЛОГИСТИКА',
+          title: '15 минут до аэропорта Стамбула',
+          subtitle: 'Глобальная мобильность и VIP-комфорт',
+          desc: 'Прямой скоростной выезд без пробок — идеальное решение для часто путешествующих бизнесменов, экспатов и международных семей.'
+        },
+        {
+          id: 'education',
+          tag: 'АКАДЕМИЧЕСКОЕ БУДУЩЕЕ',
+          title: 'Престижные частные школы',
+          subtitle: 'Школа Hisar и международные колледжи',
+          desc: 'Быстрый доступ к лучшим двуязычным образовательным кампусам и международным колледжам Турции с мировыми стандартами обучения.'
+        }
+      ]
     },
     contact: {
       badge: 'Прямой контакт',
@@ -839,9 +983,41 @@ export function localizeListing(listing, lang = 'TR') {
   if (!listing) return listing;
   const langKey = lang === 'EN' || lang === 'RU' ? lang : 'TR';
   const transMap = PROPERTY_TRANSLATIONS[listing.id];
-  if (!transMap || !transMap[langKey]) return listing;
+  const tItem = transMap && transMap[langKey] ? transMap[langKey] : {};
 
-  const tItem = transMap[langKey];
+  const defaultGallery = listing.gallery || [
+    listing.imageUrl,
+    listing.imageUrl?.includes('prop-1') ? '/assets/prop-2.jpg' : '/assets/prop-1.jpg',
+    listing.imageUrl?.includes('prop-3') ? '/assets/prop-2.jpg' : '/assets/prop-3.jpg'
+  ];
+
+  const defaultSpecs = {
+    TR: {
+      ceiling: '3.40 m',
+      heating: 'Yerden Isıtma (Rehau) + VRF',
+      parking: '2 Kapalı + 1 Misafir Otoparkı',
+      orientation: 'Güney - Doğu (Orman & Doğa Cepheli)',
+      year: '2023',
+      dues: '₺4.800 / Ay'
+    },
+    EN: {
+      ceiling: '3.40 m (11.1 ft)',
+      heating: 'Radiant Underfloor (Rehau) + Multi-VRF',
+      parking: '2 Covered Bays + Guest Space',
+      orientation: 'South-East (Unobstructed Nature View)',
+      year: '2023',
+      dues: '₺4,800 / Mo'
+    },
+    RU: {
+      ceiling: '3.40 м',
+      heating: 'Теплые полы (Rehau) + система VRF',
+      parking: '2 крытых машиноместа + гостевое',
+      orientation: 'Юго-восток (панорама на лес)',
+      year: '2023',
+      dues: '₺4.800 / Мес'
+    }
+  };
+
   return {
     ...listing,
     title: tItem.title || listing.title,
@@ -850,7 +1026,9 @@ export function localizeListing(listing, lang = 'TR') {
     badge: tItem.badge || listing.badge,
     bathrooms: tItem.bathrooms || listing.bathrooms,
     features: tItem.features || listing.features,
-    description: tItem.description || listing.description
+    description: tItem.description || listing.description,
+    gallery: defaultGallery,
+    specs: listing.specs || defaultSpecs[langKey]
   };
 }
 

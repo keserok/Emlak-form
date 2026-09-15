@@ -9,7 +9,7 @@ import {
   User, 
   Mail, 
   Home, 
-  Coins, 
+  Compass, 
   Clock, 
   MessageCircle 
 } from 'lucide-react';
@@ -18,7 +18,7 @@ import { getTranslations } from '../../data/translations';
 const INQUIRY_ICONS = {
   satilik: Home,
   kiralik: Building2,
-  arama: Coins
+  arama: Compass
 };
 
 export default function PropertyInquiryForm({ isEmbedded = false }) {

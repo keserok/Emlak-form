@@ -1,6 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppState } from '../../context/AppStateContext';
-import { PhoneCall, ArrowUpRight, Lock, Unlock, KeyRound, Sparkles, ShieldCheck } from 'lucide-react';
+import { 
+  PhoneCall, 
+  ArrowUpRight, 
+  Lock, 
+  Unlock, 
+  KeyRound, 
+  Camera, 
+  Heart, 
+  MapPin, 
+  BedDouble, 
+  Bath, 
+  Maximize2 
+} from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
 import { getTranslations, localizeListing } from '../../data/translations';
 
@@ -19,6 +31,24 @@ export default function FeaturedListings() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [vaultInputCode, setVaultInputCode] = useState('');
   const [vaultError, setVaultError] = useState('');
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('selin_favs')) || [];
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleFavorite = (e, id) => {
+    e.stopPropagation();
+    setFavorites((prev) => {
+      const updated = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+      try {
+        localStorage.setItem('selin_favs', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
 
   const t = getTranslations(language).listings;
 
@@ -64,59 +94,61 @@ export default function FeaturedListings() {
           </h2>
         </div>
 
-        {/* Minimalist Filter Pills */}
-        <div className="flex items-center justify-center flex-wrap gap-2 mb-10">
-          <button
-            type="button"
-            onClick={() => setActiveCategory('all')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              activeCategory === 'all'
-                ? 'bg-[#111827] text-white shadow-xs'
-                : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
-            }`}
-          >
-            {t.tabAll}
-          </button>
+        {/* Studio-Grade Segmented Control Filter */}
+        <div className="flex items-center justify-center mb-10 overflow-x-auto py-2">
+          <div className="inline-flex items-center p-1.5 rounded-2xl bg-[#EFEAE1] border border-[#DDD5C7] shadow-xs max-w-full">
+            <button
+              type="button"
+              onClick={() => setActiveCategory('all')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                activeCategory === 'all'
+                  ? 'bg-white text-[#111827] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {t.tabAll}
+            </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveCategory('villa')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              activeCategory === 'villa'
-                ? 'bg-[#111827] text-white shadow-xs'
-                : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
-            }`}
-          >
-            {t.tabVilla}
-          </button>
+            <button
+              type="button"
+              onClick={() => setActiveCategory('villa')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                activeCategory === 'villa'
+                  ? 'bg-white text-[#111827] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {t.tabVilla}
+            </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveCategory('penthouse')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              activeCategory === 'penthouse'
-                ? 'bg-[#111827] text-white shadow-xs'
-                : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
-            }`}
-          >
-            {t.tabPenthouse}
-          </button>
+            <button
+              type="button"
+              onClick={() => setActiveCategory('penthouse')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                activeCategory === 'penthouse'
+                  ? 'bg-white text-[#111827] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {t.tabPenthouse}
+            </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveCategory('vault')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-              activeCategory === 'vault'
-                ? 'bg-[#8A735C] text-white shadow-md'
-                : 'bg-amber-50 text-[#8A735C] border border-amber-200/80 hover:bg-amber-100/60'
-            }`}
-          >
-            {isVaultUnlocked ? <Unlock className="w-3.5 h-3.5 text-amber-200" /> : <Lock className="w-3.5 h-3.5" />}
-            <span>{t.tabVault}</span>
-            {isVaultUnlocked && (
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-1" />
-            )}
-          </button>
+            <button
+              type="button"
+              onClick={() => setActiveCategory('vault')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                activeCategory === 'vault'
+                  ? 'bg-[#8A735C] text-white shadow-xs'
+                  : 'text-[#8A735C] hover:text-[#705c48]'
+              }`}
+            >
+              {isVaultUnlocked ? <Unlock className="w-3.5 h-3.5 text-amber-200" /> : <Lock className="w-3.5 h-3.5" />}
+              <span>{t.tabVault}</span>
+              {isVaultUnlocked && (
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-1" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* VAULT LOCKED SCREEN (Öneri 1) */}
@@ -202,38 +234,66 @@ export default function FeaturedListings() {
               {filteredListings.map((rawItem) => {
                 const item = localizeListing(rawItem, language);
                 const isSold = item.status === 'Satıldı';
+                const isFav = favorites.includes(item.id);
 
                 return (
                   <div
                     key={item.id}
-                    className={`bg-white rounded-2xl border overflow-hidden flex flex-col justify-between hover:border-[#111827] transition-all duration-200 shadow-xs ${
-                      item.isOffMarket ? 'border-amber-400/60 ring-1 ring-amber-400/30' : 'border-slate-200'
+                    onClick={() => setSelectedProperty(item)}
+                    className={`group bg-white rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1.5 cursor-pointer ${
+                      item.isOffMarket
+                        ? 'border-amber-400/60 ring-1 ring-amber-400/30'
+                        : 'border-[#E8E2D8] hover:border-[#8A735C]/60'
                     }`}
                   >
                     <div>
-                      {/* Clean Image Container */}
-                      <div className="relative aspect-[4/3] sm:aspect-[16/10] bg-slate-100 overflow-hidden">
+                      {/* Cinematic Image Container with Slow Zoom */}
+                      <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
                         <img
                           src={item.imageUrl}
                           alt={item.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
 
-                        {/* Badges */}
+                        {/* Subtle Cinematic Bottom Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-60 group-hover:opacity-75 transition-opacity duration-300" />
+
+                        {/* Top Left: Badges */}
                         {item.isOffMarket ? (
                           <div className="absolute top-3 left-3 bg-slate-950/90 text-amber-300 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/40 uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-md">
                             <Lock className="w-3 h-3 text-amber-400" />
                             <span>VIP Off-Market</span>
                           </div>
                         ) : item.badge && !isSold ? (
-                          <div className="absolute top-3 left-3 bg-white/90 text-[#8A735C] text-[10px] font-bold px-2.5 py-1 rounded-md border border-[#8A735C]/20 uppercase tracking-wider backdrop-blur-md">
+                          <div className="absolute top-3 left-3 bg-white/95 text-[#8A735C] text-[10px] font-bold px-3 py-1 rounded-full border border-[#8A735C]/20 uppercase tracking-wider backdrop-blur-md shadow-xs">
                             {item.badge}
                           </div>
                         ) : null}
 
+                        {/* Top Right: Favorite / Save Heart Button */}
+                        <button
+                          type="button"
+                          onClick={(e) => toggleFavorite(e, item.id)}
+                          aria-label={isFav ? (t.saved || 'Kaydedildi') : (t.saveToFavorites || 'Favorilere Ekle')}
+                          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-200 z-10 cursor-pointer ${
+                            isFav
+                              ? 'bg-rose-600 text-white shadow-md scale-105'
+                              : 'bg-black/35 text-white/90 hover:bg-black/60 hover:text-white'
+                          }`}
+                        >
+                          <Heart className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
+                        </button>
+
+                        {/* Bottom Left: Photo Counter Pill */}
+                        <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-md bg-black/50 backdrop-blur-md text-white/90 text-[10px] font-medium flex items-center gap-1.5 pointer-events-none">
+                          <Camera className="w-3 h-3 text-white/80" />
+                          <span>{t.photoCount ? t.photoCount(1, item.gallery?.length || 3) : '1 / 3'}</span>
+                        </div>
+
+                        {/* Sold Overlay */}
                         {isSold && (
-                          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center">
-                            <span className="bg-rose-700 text-white text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-10">
+                            <span className="bg-rose-700 text-white text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                               {t.sold}
                             </span>
                           </div>
@@ -242,35 +302,44 @@ export default function FeaturedListings() {
 
                       {/* Property Info Content */}
                       <div className="p-5 sm:p-6 space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-slate-500">{item.location}</span>
-                          <span className="text-xs font-medium text-slate-400">{item.bedrooms} • {item.area}</span>
+                        <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
+                          <span className="flex items-center gap-1 text-slate-600">
+                            <MapPin className="w-3.5 h-3.5 text-[#8A735C]" />
+                            <span>{item.location}</span>
+                          </span>
+                          <span className="text-slate-400">{item.bedrooms} • {item.area}</span>
                         </div>
 
-                        <h3 className="font-semibold text-base text-[#111827] leading-snug line-clamp-2">
+                        <h3 className="font-semibold text-base text-[#111827] group-hover:text-[#8A735C] transition-colors leading-snug line-clamp-2">
                           {item.title}
                         </h3>
 
-                        <div className="text-lg font-semibold text-[#8A735C] pt-1">
-                          {formatPrice(item.priceRaw, item.price)}
+                        <div className="text-xl font-semibold text-[#8A735C] pt-1 tracking-tight flex items-baseline justify-between">
+                          <span>{formatPrice(item.priceRaw, item.price)}</span>
+                          {item.type && (
+                            <span className="text-[11px] font-normal text-slate-400">
+                              {item.type}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
 
                     {/* Clean Actions */}
-                    <div className="p-5 pt-0 sm:p-6 sm:pt-0 grid grid-cols-2 gap-3">
+                    <div className="p-5 pt-0 sm:p-6 sm:pt-0 grid grid-cols-2 gap-3 border-t border-slate-100 pt-3">
                       <button
                         type="button"
                         onClick={() => setSelectedProperty(item)}
-                        className="active-press py-3 px-3 rounded-xl bg-[#FBFBFB] hover:bg-slate-100 text-[#111827] text-xs font-medium border border-slate-200 transition-colors cursor-pointer flex items-center justify-center gap-1 tap-target"
+                        className="active-press py-2.5 px-3 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 text-[#111827] text-xs font-semibold border border-[#E8E2D8] transition-colors cursor-pointer flex items-center justify-center gap-1.5 tap-target"
                       >
                         <span>{t.inspect}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#111827] transition-colors" />
                       </button>
 
                       <a
                         href={formatPhoneForCall(agentProfile.phone)}
-                        className="active-press py-3 px-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 hover:bg-emerald-100 text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs tap-target"
+                        onClick={(e) => e.stopPropagation()}
+                        className="active-press py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs tap-target"
                       >
                         <PhoneCall className="w-3.5 h-3.5 text-emerald-600" />
                         <span>{t.call}</span>

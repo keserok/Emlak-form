@@ -71,14 +71,17 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-6 text-xs font-medium text-slate-600">
+          <a href="#portfoy" className="hover:text-[#111827] transition-colors py-2">
+            {t.portfolio}
+          </a>
+          <a href="#bolge" className="hover:text-[#111827] transition-colors py-2">
+            {t.regionGuide || 'Bölge Rehberi'}
+          </a>
           <a href="#hakkimda" className="hover:text-[#111827] transition-colors py-2">
             {t.about}
           </a>
           <a href="#surec" className="hover:text-[#111827] transition-colors py-2">
             {t.process}
-          </a>
-          <a href="#portfoy" className="hover:text-[#111827] transition-colors py-2">
-            {t.portfolio}
           </a>
           <a href="#iletisim" className="hover:text-[#111827] transition-colors py-2">
             {t.contact}
@@ -247,6 +250,24 @@ export default function Navbar() {
 
           <div className="flex flex-col space-y-3 font-medium text-sm text-[#111827]">
             <a
+              href="#portfoy"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-lg hover:bg-slate-100 transition-colors active-press flex items-center justify-between"
+            >
+              <span>{t.portfolio}</span>
+              <span className="text-slate-400 text-xs">→</span>
+            </a>
+
+            <a
+              href="#bolge"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-lg hover:bg-slate-100 transition-colors active-press flex items-center justify-between"
+            >
+              <span>{t.regionGuide || 'Bölge Rehberi'}</span>
+              <span className="text-slate-400 text-xs">→</span>
+            </a>
+
+            <a
               href="#hakkimda"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-lg hover:bg-slate-100 transition-colors active-press flex items-center justify-between"
@@ -264,14 +285,7 @@ export default function Navbar() {
               <span className="text-slate-400 text-xs">→</span>
             </a>
 
-            <a
-              href="#portfoy"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-3 rounded-lg hover:bg-slate-100 transition-colors active-press flex items-center justify-between"
-            >
-              <span>{t.portfolio}</span>
-              <span className="text-slate-400 text-xs">→</span>
-            </a>
+
 
             <a
               href="#iletisim"

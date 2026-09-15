@@ -7,13 +7,14 @@ import TrustStatsBar from './components/showcase/TrustStatsBar';
 import AboutSection from './components/showcase/AboutSection';
 import ListingProcess from './components/showcase/ListingProcess';
 import FeaturedListings from './components/showcase/FeaturedListings';
+import NeighborhoodGuide from './components/showcase/NeighborhoodGuide';
 import PropertyModal from './components/showcase/PropertyModal';
 import ContactSection from './components/showcase/ContactSection';
 import Footer from './components/showcase/Footer';
 import MobileQuickDock from './components/showcase/MobileQuickDock';
 import AdminLayout from './components/admin/AdminLayout';
 import PropertyInquiryForm from './components/form/PropertyInquiryForm';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft, Info } from 'lucide-react';
 import { getTranslations } from './data/translations';
 
 function MainContent({ onReturn }) {
@@ -43,7 +44,7 @@ function MainContent({ onReturn }) {
           </div>
 
           <div className="flex items-center gap-2 text-[11px] text-amber-300/90 font-mono">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <Info className="w-3.5 h-3.5 text-amber-400" />
             <span>{t.banner.helperNotice}</span>
           </div>
         </div>
@@ -55,9 +56,10 @@ function MainContent({ onReturn }) {
           <Navbar />
           <HeroSection />
           <TrustStatsBar />
+          <FeaturedListings />
+          <NeighborhoodGuide />
           <AboutSection />
           <ListingProcess />
-          <FeaturedListings />
           {/* Mülk Değerleme & Talep Formu (Direct customer access) */}
           <section id="degerleme" className="scroll-mt-20 py-16 sm:py-20 bg-[#FAF8F5] border-t border-[#E8E2D9]">
             <PropertyInquiryForm isEmbedded={true} />

@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-sans {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom Keyframe Animations for Fluid Mobile UX */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Touch Active Feedback for Mobile */
+.active-press {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.active-press:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Minimalist Clean Glass Cards */
+.minimal-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  transition: all 0.25s ease-in-out;
+}
+
+.minimal-card:hover {
+  border-color: #111827;
+  transform: translateY(-2px);
+}
+
+/* Smooth Arch Image Clip */
+.arch-frame {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+/* Touch target minimum 44px safety */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

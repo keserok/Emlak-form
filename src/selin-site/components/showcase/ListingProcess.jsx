@@ -21,23 +21,23 @@ export default function ListingProcess() {
         </div>
 
         {/* 5 Minimal Horizontal / Mobile Vertical Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3.5 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-4">
           {t.process.steps.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#FBFBFB] p-5 rounded-2xl border border-slate-200 space-y-2 flex flex-col justify-between active-press"
+              className="group bg-[#FAF8F5] p-5 sm:p-6 rounded-2xl border border-[#E8E2D8] space-y-3 flex flex-col justify-between hover:bg-white hover:border-[#8A735C]/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 active-press"
             >
-              <div className="flex items-center justify-between md:block">
-                <div className="text-xs font-bold text-[#8A735C]">
-                  {t.process.stepPrefix} {item.step}
+              <div>
+                <div className="w-8 h-8 rounded-lg bg-white border border-[#E8E2D8] flex items-center justify-center text-xs font-mono font-bold text-[#8A735C] group-hover:bg-[#8A735C] group-hover:text-white transition-colors">
+                  {item.step}
                 </div>
 
-                <h3 className="font-semibold text-sm text-[#111827] md:mt-2">
+                <h3 className="font-semibold text-sm text-[#111827] mt-3 group-hover:text-[#8A735C] transition-colors leading-snug">
                   {item.title}
                 </h3>
               </div>
 
-              <p className="text-xs text-slate-500 leading-relaxed font-normal pt-1">
+              <p className="text-xs text-slate-500 leading-relaxed font-normal pt-1 border-t border-slate-100">
                 {item.description}
               </p>
             </div>
