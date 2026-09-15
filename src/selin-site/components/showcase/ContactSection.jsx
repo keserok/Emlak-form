@@ -2,24 +2,26 @@ import React from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import { PhoneCall, Mail, MapPin } from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
+import { getTranslations } from '../../data/translations';
 
 export default function ContactSection() {
-  const { agentProfile, setViewMode } = useAppState();
+  const { agentProfile, setViewMode, language } = useAppState();
+  const t = getTranslations(language).contact;
 
   return (
     <section id="iletisim" className="py-20 bg-[#111827] text-white">
       <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
         
         <span className="text-xs font-semibold uppercase tracking-widest text-[#8A735C]">
-          Doğrudan İletişim
+          {t.badge}
         </span>
 
         <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
-          Göktürk'teki Gayrimenkulünüz İçin Görüşelim
+          {t.title}
         </h2>
 
         <p className="text-sm text-slate-300 max-w-xl mx-auto leading-relaxed font-normal">
-          Evinizi değerinde satmak, kiraya vermek veya yeni bir portföy incelemek için doğrudan arayabilir ya da online form ile talebinizi iletebilirsiniz.
+          {t.description}
         </p>
 
         {/* Action Buttons: Phone & Form */}
@@ -29,7 +31,7 @@ export default function ContactSection() {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors cursor-pointer shadow-md"
           >
             <PhoneCall className="w-4.5 h-4.5 text-white" />
-            <span>Selin Hanım'ı Arayın: {agentProfile.phone}</span>
+            <span>{t.callBtn(agentProfile.phone)}</span>
           </a>
 
           <button
@@ -44,7 +46,7 @@ export default function ContactSection() {
             }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#8A735C] hover:bg-[#a38053] text-white text-sm font-semibold transition-colors cursor-pointer shadow-md"
           >
-            <span>Mülk Değerleme & Talep Formu</span>
+            <span>{t.formBtn}</span>
           </button>
         </div>
 

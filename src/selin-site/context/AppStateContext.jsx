@@ -47,10 +47,14 @@ export const AppStateProvider = ({ children }) => {
   const [publishSuccess, setPublishSuccess] = useState(false);
 
   // Currency State: 'TRY' | 'USD' | 'EUR'
-  const [currency, setCurrency] = useState('TRY');
+  const [currency, setCurrency] = useState(() => {
+    return localStorage.getItem('selin_currency') || 'TRY';
+  });
 
   // Language State: 'TR' | 'EN' | 'RU'
-  const [language, setLanguage] = useState('TR');
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem('selin_language') || 'TR';
+  });
 
   // Off-Market Vault State
   const [isVaultUnlocked, setIsVaultUnlocked] = useState(() => {
@@ -110,6 +114,14 @@ export const AppStateProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.SUBMISSIONS, JSON.stringify(formSubmissions));
   }, [formSubmissions]);
+
+  useEffect(() => {
+    localStorage.setItem('selin_language', language);
+  }, [language]);
+
+  useEffect(() => {
+    localStorage.setItem('selin_currency', currency);
+  }, [currency]);
 
   // Update Profile Field
   const updateProfile = (field, value) => {

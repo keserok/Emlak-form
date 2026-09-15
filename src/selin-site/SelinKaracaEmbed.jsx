@@ -10,12 +10,15 @@ import FeaturedListings from './components/showcase/FeaturedListings';
 import PropertyModal from './components/showcase/PropertyModal';
 import ContactSection from './components/showcase/ContactSection';
 import Footer from './components/showcase/Footer';
+import MobileQuickDock from './components/showcase/MobileQuickDock';
 import AdminLayout from './components/admin/AdminLayout';
 import PropertyInquiryForm from './components/form/PropertyInquiryForm';
 import { ArrowLeft, Sparkles } from 'lucide-react';
+import { getTranslations } from './data/translations';
 
 function MainContent({ onReturn }) {
-  const { viewMode } = useAppState();
+  const { viewMode, language } = useAppState();
+  const t = getTranslations(language);
 
   return (
     <div className="selin-site-root min-h-screen bg-[#FBFBFB] text-[#111827] font-sans antialiased selection:bg-[#8A735C]/20 selection:text-[#8A735C]">
@@ -30,19 +33,18 @@ function MainContent({ onReturn }) {
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold text-white tracking-wide transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95"
               >
                 <ArrowLeft className="w-3.5 h-3.5 text-amber-400" />
-                <span>← Emlak Formuna Dön</span>
+                <span>{t.banner.returnToForm}</span>
               </button>
             )}
             <div className="hidden sm:flex items-center gap-2 text-xs text-slate-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-medium text-white">Canlı Örnek:</span>
-              <span>Selin Karaca (Premium Paket)</span>
+              <span>{t.banner.liveDemo}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-[11px] text-amber-300/90 font-mono">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>En alt ve en üst bar müşterilerinize görünmeyecektir</span>
+            <span>{t.banner.helperNotice}</span>
           </div>
         </div>
       </div>
@@ -63,6 +65,7 @@ function MainContent({ onReturn }) {
           <ContactSection />
           <Footer />
           <PropertyModal />
+          <MobileQuickDock />
         </main>
       ) : viewMode === 'form' ? (
         <main className="py-8">

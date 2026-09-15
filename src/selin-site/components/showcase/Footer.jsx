@@ -1,8 +1,13 @@
 import React from 'react';
 import { useAppState } from '../../context/AppStateContext';
+import { getTranslations } from '../../data/translations';
 
 export default function Footer() {
-  const { agentProfile } = useAppState();
+  const { agentProfile, language } = useAppState();
+  const t = getTranslations(language);
+
+  const displayTitle = (language !== 'TR' && t.hero?.title) ? t.hero.title : agentProfile.title;
+  const displayRegion = (language !== 'TR' && t.hero?.region) ? t.hero.region : agentProfile.region;
 
   return (
     <footer className="bg-[#0F1720] text-slate-400 py-12 border-t border-slate-800 text-xs">
@@ -13,12 +18,12 @@ export default function Footer() {
             {agentProfile.name}
           </div>
           <div className="text-[#8C6D46] font-medium mt-0.5">
-            {agentProfile.title} - {agentProfile.region}
+            {displayTitle} - {displayRegion}
           </div>
         </div>
 
         <div className="text-slate-500">
-          © {new Date().getFullYear()} {agentProfile.name}. Tüm hakları saklıdır. Masaüstü Vitrin Kontrol Merkezi ile Güçlendirilmiştir.
+          © {new Date().getFullYear()} {agentProfile.name}. {t.footer.rights}
         </div>
 
       </div>

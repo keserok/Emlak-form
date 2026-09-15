@@ -5,12 +5,15 @@ import ListingsManager from './ListingsManager';
 import SubmissionsManager from './SubmissionsManager';
 import DeployTriggerModal from './DeployTriggerModal';
 import { User, Building, Send, Eye, ShieldCheck, Sparkles, CheckCircle2, Inbox } from 'lucide-react';
+import { getTranslations } from '../../data/translations';
 
 export default function AdminLayout() {
-  const { agentProfile, setViewMode, triggerPublish, isPublishing, publishSuccess, formSubmissions } = useAppState();
+  const { agentProfile, setViewMode, triggerPublish, isPublishing, publishSuccess, formSubmissions, language } = useAppState();
   const [activeTab, setActiveTab] = useState('submissions');
+  const tAdmin = getTranslations(language).admin || {};
 
   const newSubmissionsCount = formSubmissions?.filter((s) => s.status === 'Yeni').length || 0;
+  const newText = language === 'EN' ? 'New' : language === 'RU' ? 'Новых' : 'Yeni';
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] pb-24">
@@ -23,13 +26,13 @@ export default function AdminLayout() {
             <div className="space-y-1">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-300 px-3 py-1 bg-[#8C6D46]/30 rounded-full border border-[#8C6D46]/50">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                Masaüstü Vitrin Kontrol Merkezi
+                {tAdmin.badge || 'Masaüstü Vitrin Kontrol Merkezi'}
               </div>
               <h1 className="font-serif-title font-bold text-2xl sm:text-3xl text-amber-100 mt-1">
-                Hoş Geldiniz, {agentProfile.name}
+                {tAdmin.welcome || 'Hoş Geldiniz'}, {agentProfile.name}
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 font-sans">
-                Aylık sunucu ücreti ve karmaşık şifreler yok. Değişiklikleri yapın, <strong>"Web Sitemi Güncelle"</strong> butonuna basın.
+                {tAdmin.notice || 'Aylık sunucu ücreti ve karmaşık şifreler yok. Değişiklikleri yapın, "Web Sitemi Güncelle" butonuna basın.'}
               </p>
             </div>
 
@@ -40,7 +43,7 @@ export default function AdminLayout() {
                 className="flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-600 transition-colors cursor-pointer"
               >
                 <Eye className="w-4 h-4 text-amber-300" />
-                <span>Canlı Sitede Önizle</span>
+                <span>{tAdmin.previewLive || 'Canlı Sitede Önizle'}</span>
               </button>
 
               <button
@@ -49,7 +52,7 @@ export default function AdminLayout() {
                 className="flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#8C6D46] hover:bg-[#a38053] text-white font-bold text-sm shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               >
                 <Send className="w-4 h-4 text-white animate-pulse" />
-                <span>Değişiklikleri Yayınla (Canlıya Al)</span>
+                <span>{tAdmin.publishChanges || 'Değişiklikleri Yayınla (Canlıya Al)'}</span>
               </button>
             </div>
 
@@ -71,10 +74,10 @@ export default function AdminLayout() {
             }`}
           >
             <Inbox className="w-4 h-4 text-[#8C6D46]" />
-            <span>Gelen Form Başvuruları</span>
+            <span>{tAdmin.tabSubmissions || 'Gelen Form Başvuruları'}</span>
             {newSubmissionsCount > 0 && (
               <span className="ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-400 text-slate-900 animate-pulse">
-                {newSubmissionsCount} Yeni
+                {newSubmissionsCount} {newText}
               </span>
             )}
           </button>
@@ -88,7 +91,7 @@ export default function AdminLayout() {
             }`}
           >
             <User className="w-4 h-4 text-[#8C6D46]" />
-            <span>Kişisel Marka & Profil</span>
+            <span>{tAdmin.tabProfile || 'Danışman Profili'}</span>
           </button>
 
           <button
@@ -100,7 +103,7 @@ export default function AdminLayout() {
             }`}
           >
             <Building className="w-4 h-4 text-[#8C6D46]" />
-            <span>Öne Çıkan 6 Portföy İlanı</span>
+            <span>{tAdmin.tabListings || 'Portföy Yönetimi'}</span>
           </button>
         </div>
 

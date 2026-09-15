@@ -2,35 +2,18 @@ import React from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import { PhoneCall, ArrowUpRight } from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
+import { getTranslations } from '../../data/translations';
 
 export default function HeroSection() {
   const { agentProfile, setViewMode, language } = useAppState();
+  const tHero = getTranslations(language).hero;
 
-  const t = {
-    TR: {
-      headline: agentProfile.heroHeadline,
-      subheadline: agentProfile.heroSubheadline,
-      callButton: `Hemen Arayın (${agentProfile.phone})`,
-      formButton: 'Mülk Değerleme Formu'
-    },
-    EN: {
-      headline: "Sell Your Home in Göktürk at Real Value Without Stress.",
-      subheadline: "Don't get lost in crowded listing portals. We guide you with 12 years of district mastery, high-net-worth buyers network, and transparent advisory.",
-      callButton: `Call Direct (${agentProfile.phone})`,
-      formButton: 'Property Valuation Form'
-    },
-    RU: {
-      headline: "Продайте ваш дом в Гёктюрке по реальной стоимости без стресса.",
-      subheadline: "Не теряйтесь среди обычных порталов. Мы рядом с вами: 12 лет опыта в районе, закрытая база VIP-покупателей и абсолютная прозрачность.",
-      callButton: `Позвонить (${agentProfile.phone})`,
-      formButton: 'Форма оценки недвижимости'
-    }
-  }[language] || {
-    headline: agentProfile.heroHeadline,
-    subheadline: agentProfile.heroSubheadline,
-    callButton: `Hemen Arayın (${agentProfile.phone})`,
-    formButton: 'Mülk Değerleme Formu'
-  };
+  const headline = language !== 'TR' ? tHero.headline : agentProfile.heroHeadline;
+  const subheadline = language !== 'TR' ? tHero.subheadline : agentProfile.heroSubheadline;
+  const callButton = tHero.callBtn(agentProfile.phone);
+  const formButton = tHero.formBtn;
+  const displayRegion = (language !== 'TR' && tHero?.region) ? tHero.region : agentProfile.region;
+  const displayTitle = (language !== 'TR' && tHero?.title) ? tHero.title : agentProfile.title;
 
   const handleOpenForm = (e) => {
     e?.preventDefault();
@@ -53,17 +36,17 @@ export default function HeroSection() {
             
             {/* Simple Muted Region Badge */}
             <div className="inline-block text-[11px] sm:text-xs font-semibold tracking-widest text-[#8A735C] uppercase px-3 py-1 bg-[#F4F1EA] rounded-md border border-[#8A735C]/20">
-              {agentProfile.region}
+              {displayRegion}
             </div>
 
             {/* Calm Clean Responsive Headline */}
             <h1 className="text-3xl sm:text-5xl font-semibold text-[#111827] tracking-tight leading-[1.2]">
-              {t.headline}
+              {headline}
             </h1>
 
             {/* Concise Calm Subheadline */}
             <p className="text-sm sm:text-lg text-slate-600 font-normal leading-relaxed max-w-xl">
-              {t.subheadline}
+              {subheadline}
             </p>
 
             {/* Light Green Call Button & Secondary Actions */}
@@ -73,7 +56,7 @@ export default function HeroSection() {
                 className="active-press inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors cursor-pointer shadow-sm tap-target"
               >
                 <PhoneCall className="w-4 h-4 text-white" />
-                <span>{t.callButton}</span>
+                <span>{callButton}</span>
               </a>
 
               <button
@@ -81,7 +64,7 @@ export default function HeroSection() {
                 onClick={handleOpenForm}
                 className="active-press inline-flex items-center justify-center gap-1.5 px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-[#8A735C]/50 text-sm font-semibold text-[#8A735C] transition-colors cursor-pointer shadow-xs tap-target"
               >
-                <span>{t.formButton}</span>
+                <span>{formButton}</span>
                 <ArrowUpRight className="w-4 h-4 text-[#8A735C]" />
               </button>
             </div>
@@ -105,7 +88,7 @@ export default function HeroSection() {
                   {agentProfile.name}
                 </div>
                 <div className="text-xs text-[#8A735C] mt-0.5">
-                  {agentProfile.title}
+                  {displayTitle}
                 </div>
               </div>
             </div>

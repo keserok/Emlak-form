@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import { PhoneCall, Menu, X, Globe, ChevronDown, Check } from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
+import { getTranslations } from '../../data/translations';
 
 export default function Navbar() {
   const { 
@@ -32,43 +33,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const t = {
-    TR: {
-      about: 'Hakkımda',
-      process: 'Süreç',
-      portfolio: 'Portföy',
-      contact: 'İletişim',
-      valuation: 'Mülkünü Değerle / Sat',
-      inquiry: 'Talep Formu',
-      callPrefix: 'Hemen Arayın'
-    },
-    EN: {
-      about: 'About',
-      process: '5-Step Process',
-      portfolio: 'Portfolio',
-      contact: 'Contact',
-      valuation: 'Valuation & Sell',
-      inquiry: 'Inquiry Form',
-      callPrefix: 'Call Direct'
-    },
-    RU: {
-      about: 'Обо мне',
-      process: 'Процесс',
-      portfolio: 'Портфолио',
-      contact: 'Контакты',
-      valuation: 'Оценка / Продажа',
-      inquiry: 'Форма запроса',
-      callPrefix: 'Позвонить'
-    }
-  }[language] || {
-    about: 'Hakkımda',
-    process: 'Süreç',
-    portfolio: 'Portföy',
-    contact: 'İletişim',
-    valuation: 'Mülkünü Değerle / Sat',
-    inquiry: 'Talep Formu',
-    callPrefix: 'Hemen Arayın'
-  };
+  const t = getTranslations(language).nav;
 
   const handleOpenForm = (e) => {
     e?.preventDefault();
@@ -100,7 +65,7 @@ export default function Navbar() {
           </span>
           <span className="text-slate-300">|</span>
           <span className="text-xs font-medium text-[#8A735C]">
-            Göktürk
+            {t.region || 'Göktürk'}
           </span>
         </a>
 
@@ -159,7 +124,7 @@ export default function Navbar() {
                 <div>
                   <div className="flex items-center justify-between px-1 mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                      DİL SEÇİMİ
+                      {t.langHeading || 'DİL SEÇİMİ'}
                     </span>
                     <span className="text-[10px] font-semibold text-[#8A735C]">Language</span>
                   </div>
@@ -201,7 +166,7 @@ export default function Navbar() {
                 <div>
                   <div className="flex items-center justify-between px-1 mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                      PARA BİRİMİ
+                      {t.currencyHeading || 'PARA BİRİMİ'}
                     </span>
                     <span className="text-[10px] font-semibold text-[#8A735C]">Currency</span>
                   </div>
@@ -326,7 +291,7 @@ export default function Navbar() {
               className="w-full py-2.5 px-3 rounded-lg bg-[#FAF8F5] border border-[#8A735C]/30 hover:bg-[#F4F1EA] transition-colors active-press flex items-center justify-between text-left cursor-pointer"
             >
               <span className="font-semibold text-[#8A735C]">{t.valuation}</span>
-              <span className="text-xs bg-[#8A735C] text-white px-2 py-0.5 rounded-md font-bold">Aç →</span>
+              <span className="text-xs bg-[#8A735C] text-white px-2 py-0.5 rounded-md font-bold">{t.open || 'Aç →'}</span>
             </button>
           </div>
 

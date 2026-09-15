@@ -1,14 +1,16 @@
 import React from 'react';
 import { useAppState } from '../../context/AppStateContext';
+import { getTranslations } from '../../data/translations';
 
 export default function TrustStatsBar() {
-  const { agentProfile } = useAppState();
+  const { language } = useAppState();
+  const t = getTranslations(language);
 
   return (
     <section className="bg-white py-10 sm:py-12 border-b border-[#E5E7EB]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
-          {agentProfile.stats && agentProfile.stats.map((stat, idx) => (
+          {t.stats && t.stats.map((stat, idx) => (
             <div key={idx} className="space-y-1 p-2 sm:p-0">
               <div className="text-2xl sm:text-3xl font-semibold text-[#111827] tracking-tight">
                 {stat.value}

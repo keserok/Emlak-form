@@ -2,11 +2,14 @@ import React from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import { X, PhoneCall, MapPin, CheckCircle, ShieldCheck } from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
+import { getTranslations, localizeListing } from '../../data/translations';
 
 export default function PropertyModal() {
-  const { selectedProperty, setSelectedProperty, agentProfile, formatPrice } = useAppState();
+  const { selectedProperty: rawProperty, setSelectedProperty, agentProfile, formatPrice, language } = useAppState();
 
-  if (!selectedProperty) return null;
+  if (!rawProperty) return null;
+  const selectedProperty = localizeListing(rawProperty, language);
+  const t = getTranslations(language).modal;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md animate-fade-in">
@@ -45,7 +48,7 @@ export default function PropertyModal() {
             </div>
 
             <div className="text-left sm:text-right">
-              <div className="text-xs uppercase font-bold text-slate-400">Pazar Fiyatı</div>
+              <div className="text-xs uppercase font-bold text-slate-400">{t.marketPrice}</div>
               <div className="font-bold text-2xl text-[#8A735C]">
                 {formatPrice(selectedProperty.priceRaw, selectedProperty.price)}
               </div>
@@ -55,15 +58,15 @@ export default function PropertyModal() {
           {/* Quick Specifications */}
           <div className="grid grid-cols-3 gap-4 bg-[#FBFBFB] p-4 rounded-2xl border border-slate-200 text-center">
             <div>
-              <div className="text-xs text-slate-500 font-medium">Oda Sayısı</div>
+              <div className="text-xs text-slate-500 font-medium">{t.bedrooms}</div>
               <div className="font-bold text-base text-[#111827]">{selectedProperty.bedrooms}</div>
             </div>
             <div>
-              <div className="text-xs text-slate-500 font-medium">Banyo</div>
+              <div className="text-xs text-slate-500 font-medium">{t.bathrooms}</div>
               <div className="font-bold text-base text-[#111827]">{selectedProperty.bathrooms}</div>
             </div>
             <div>
-              <div className="text-xs text-slate-500 font-medium">Alan</div>
+              <div className="text-xs text-slate-500 font-medium">{t.area}</div>
               <div className="font-bold text-base text-[#111827]">{selectedProperty.area}</div>
             </div>
           </div>
@@ -71,7 +74,7 @@ export default function PropertyModal() {
           {/* Description */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-              Mülk Özeti
+              {t.overview}
             </h4>
             <p className="text-sm text-slate-600 leading-relaxed font-normal">
               {selectedProperty.description}
@@ -82,7 +85,7 @@ export default function PropertyModal() {
           {selectedProperty.features && selectedProperty.features.length > 0 && (
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
-                Donanımlar
+                {t.features}
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {selectedProperty.features.map((feat, idx) => (
@@ -102,23 +105,23 @@ export default function PropertyModal() {
               className="w-full sm:flex-1 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
             >
               <PhoneCall className="w-4 h-4 text-white" />
-              <span>Telefonla Bilgi Al ({agentProfile.phone})</span>
+              <span>{t.callAction} ({agentProfile.phone})</span>
             </a>
 
             <a
-              href={`https://wa.me/${agentProfile.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Merhaba Selin Hanım, "${selectedProperty.title}" mülkünüz hakkında detaylı bilgi ve yatırımcı dosyasını almak istiyorum.`)}`}
+              href={`https://wa.me/${agentProfile.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(t.waMessage(selectedProperty.title))}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-[#8A735C] hover:bg-[#725e4a] text-white text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
             >
-              <span>Yatırımcı Dosyası İste</span>
+              <span>{t.dossierAction}</span>
             </a>
 
             <button
               onClick={() => setSelectedProperty(null)}
               className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
             >
-              Kapat
+              {t.close}
             </button>
           </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import { PhoneCall, ArrowUpRight, Lock, Unlock, KeyRound, Sparkles, ShieldCheck } from 'lucide-react';
 import { formatPhoneForCall } from '../../utils/whatsappHelper';
+import { getTranslations, localizeListing } from '../../data/translations';
 
 export default function FeaturedListings() {
   const { 
@@ -19,74 +20,14 @@ export default function FeaturedListings() {
   const [vaultInputCode, setVaultInputCode] = useState('');
   const [vaultError, setVaultError] = useState('');
 
-  const t = {
-    TR: {
-      badge: 'Portföy Seçkileri',
-      title: 'Öne Çıkan Gayrimenkuller',
-      tabAll: 'Tümü',
-      tabVilla: 'Müstakil Villa',
-      tabPenthouse: 'Penthouse & Konak',
-      tabVault: '🔒 Gizli Kasa (Off-Market)',
-      inspect: 'İncele',
-      call: 'Hemen Ara',
-      vaultTitle: 'Selin Karaca Off-Market Portföy Kasası',
-      vaultDesc: 'Göktürk ve Boğaz hattında gizlilik sözleşmesi (NDA) ile korunan seçkin malikane ve yalı koleksiyonu. Erişim yalnızca teyitli VIP alıcılara açıktır.',
-      vaultPlaceholder: 'VIP Erişim Kodu (Örn: VIP2026)',
-      vaultBtn: 'Kasayı Aç',
-      vaultWhatsapp: 'VIP Erişim Kodu Talep Edin (WhatsApp) →'
-    },
-    EN: {
-      badge: 'Portfolio Highlights',
-      title: 'Featured Luxury Properties',
-      tabAll: 'All',
-      tabVilla: 'Private Villa',
-      tabPenthouse: 'Penthouse & Mansion',
-      tabVault: '🔒 Private Vault (Off-Market)',
-      inspect: 'Inspect',
-      call: 'Call Direct',
-      vaultTitle: 'Selin Karaca Private Off-Market Vault',
-      vaultDesc: 'A discreet collection of prestigious estates protected by strict NDA agreements. Access is strictly granted to verified high-net-worth buyers.',
-      vaultPlaceholder: 'Enter VIP Access Code (e.g. VIP2026)',
-      vaultBtn: 'Unlock Vault',
-      vaultWhatsapp: 'Request VIP Access Code via WhatsApp →'
-    },
-    RU: {
-      badge: 'Избранное',
-      title: 'Престижная недвижимость',
-      tabAll: 'Все',
-      tabVilla: 'Виллы',
-      tabPenthouse: 'Пентхаусы и особняки',
-      tabVault: '🔒 Закрытая база (Off-Market)',
-      inspect: 'Подробнее',
-      call: 'Позвонить',
-      vaultTitle: 'Закрытая база Selin Karaca Off-Market',
-      vaultDesc: 'Коллекция элитной недвижимости в Гёктюрке и на Босфоре под защитой NDA. Доступ только для верифицированных VIP-покупателей.',
-      vaultPlaceholder: 'Введите VIP-код доступа (напр. VIP2026)',
-      vaultBtn: 'Открыть базу',
-      vaultWhatsapp: 'Запросить VIP-код в WhatsApp →'
-    }
-  }[language] || {
-    badge: 'Portföy Seçkileri',
-    title: 'Öne Çıkan Gayrimenkuller',
-    tabAll: 'Tümü',
-    tabVilla: 'Müstakil Villa',
-    tabPenthouse: 'Penthouse & Konak',
-    tabVault: '🔒 Gizli Kasa (Off-Market)',
-    inspect: 'İncele',
-    call: 'Hemen Ara',
-    vaultTitle: 'Selin Karaca Off-Market Portföy Kasası',
-    vaultDesc: 'Göktürk ve Boğaz hattında gizlilik sözleşmesi (NDA) ile korunan seçkin malikane ve yalı koleksiyonu. Erişim yalnızca teyitli VIP alıcılara açıktır.',
-    vaultPlaceholder: 'VIP Erişim Kodu (Örn: VIP2026)',
-    vaultBtn: 'Kasayı Aç',
-    vaultWhatsapp: 'VIP Erişim Kodu Talep Edin (WhatsApp) →'
-  };
+  const t = getTranslations(language).listings;
 
   const handleUnlock = (e) => {
     e.preventDefault();
     setVaultError('');
     const res = unlockVault(vaultInputCode);
     if (!res.success) {
-      setVaultError(res.message);
+      setVaultError(t.vaultInvalid || 'Geçersiz VIP erişim kodu.');
     } else {
       setVaultInputCode('');
     }
@@ -187,7 +128,7 @@ export default function FeaturedListings() {
 
             <div className="space-y-2">
               <span className="text-[11px] uppercase tracking-widest text-amber-400/90 font-bold block">
-                ÖZEL GİZLİLİK PROTOKOLÜ (NDA)
+                {t.ndaProtocol || 'ÖZEL GİZLİLİK PROTOKOLÜ (NDA)'}
               </span>
               <h3 className="text-xl sm:text-2xl font-semibold text-white">
                 {t.vaultTitle}
@@ -224,14 +165,16 @@ export default function FeaturedListings() {
 
               <div className="pt-2 text-[11px] text-slate-400 flex flex-col items-center gap-1.5">
                 <a
-                  href={`https://wa.me/${agentProfile.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Merhaba Selin Hanım, sitenizdeki Off-Market / Gizli Portföy Kasası için VIP erişim kodu talep ediyorum.')}`}
+                  href={`https://wa.me/${agentProfile.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(t.vaultWaMsg || 'Merhaba Selin Hanım, sitenizdeki Off-Market / Gizli Portföy Kasası için VIP erişim kodu talep ediyorum.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-amber-300 hover:text-amber-200 transition-colors font-medium flex items-center gap-1"
                 >
                   <span>{t.vaultWhatsapp}</span>
                 </a>
-                <span className="text-[10px] text-slate-500 font-mono">Hızlı İnceleme Test Kodu: VIP2026</span>
+                <span className="text-[10px] text-slate-500 font-mono">
+                  {t.vaultTestCode || (language === 'EN' ? 'Quick Review Code: VIP2026' : language === 'RU' ? 'Тестовый код: VIP2026' : 'Hızlı İnceleme Test Kodu: VIP2026')}
+                </span>
               </div>
             </form>
           </div>
@@ -242,21 +185,22 @@ export default function FeaturedListings() {
               <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-4 max-w-6xl mx-auto">
                 <div className="flex items-center gap-2.5 text-xs text-amber-900 font-semibold">
                   <Unlock className="w-4 h-4 text-amber-700" />
-                  <span>VIP KASA AÇIK: Göktürk & Boğaz hattı gizli malikaneleri listeleniyor</span>
+                  <span>{t.vaultUnlockedBanner}</span>
                 </div>
                 <button
                   type="button"
                   onClick={lockVault}
                   className="text-xs text-slate-500 hover:text-rose-600 underline font-medium cursor-pointer"
                 >
-                  Kasayı Yeniden Kilitle
+                  {t.vaultRelock}
                 </button>
               </div>
             )}
 
             {/* Property Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {filteredListings.map((item) => {
+              {filteredListings.map((rawItem) => {
+                const item = localizeListing(rawItem, language);
                 const isSold = item.status === 'Satıldı';
 
                 return (
@@ -290,7 +234,7 @@ export default function FeaturedListings() {
                         {isSold && (
                           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center">
                             <span className="bg-rose-700 text-white text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                              SATILDI
+                              {t.sold}
                             </span>
                           </div>
                         )}
