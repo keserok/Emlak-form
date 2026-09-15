@@ -217,11 +217,13 @@ export default function StepCard({
           {option.title}
         </h3>
 
-        {/* Optional Quote / Manifesto */}
+        {/* Optional Quote / Manifesto - Prominent Aesthetic Editorial Font */}
         {option.quote && (
-          <p className="text-xs font-serif italic text-gold/90 mb-2.5 leading-relaxed pl-3 border-l-2 border-gold/40 py-0.5 bg-gold/[0.02] rounded-r">
-            {option.quote}
-          </p>
+          <div className="my-3 py-2.5 px-3.5 rounded-2xl bg-gradient-to-r from-gold/[0.08] via-gold/[0.03] to-transparent border-l-2 border-gold/70 border-t border-r border-b border-gold/15">
+            <p className="text-[15px] sm:text-base md:text-[17px] font-serif italic text-gold-light font-normal leading-relaxed">
+              {option.quote}
+            </p>
+          </div>
         )}
 
         {/* Description Focus */}
